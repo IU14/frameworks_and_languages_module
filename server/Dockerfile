@@ -1,4 +1,10 @@
-FROM python:alpine
+FROM python
+
 WORKDIR /app/
+
+RUN pip install falcon
+RUN pip install gunicorn
+
 COPY . .
-CMD ["python", "-m", "http.server", "8000"]
+
+CMD ["python", "myfalcon.py"]

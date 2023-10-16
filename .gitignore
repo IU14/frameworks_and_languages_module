@@ -19,3 +19,7 @@ yarn.lock
 
 # generated files for this repo
 openapi.html
+
+**/bin/
+**/obj/
+

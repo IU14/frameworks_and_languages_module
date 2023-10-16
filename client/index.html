@@ -1,0 +1,26 @@
+<h2>Create</h2>
+<form>
+    <input name="user_id" placeholder="user_id">
+    <input name="lat" placeholder="lat">
+    <input name="lon" placeholder="lon">
+    <input name="image" placeholder="image">
+    <input name="keywords" placeholder="keywords">
+    <textarea name="description" placeholder="description"></textarea>
+    <button data-action="create_item">Create Item</button>
+</form>
+<!-- Hints
+    1.) Prevent default onSubmit behaviour
+    2.) Bind all inputs to data model
+    3.) Bind POST action to button
+-->
+
+<h2>Items</h2>
+<ul>
+    <li><!-- Somehow templated for each item -->
+        <img src="item.image">
+        <span data-field="id">??? item.id ???</span>
+        <span data-field="lat">??? item.lat ???</span>
+        ...
+        <button data-action="delete" someKindOfOnClickAction="deleteItem(item.id)">Delete</button>
+    </li>
+</ul>
