@@ -3,8 +3,12 @@ const app = express()
 const port = 8000
 const path = require('path');
 
-app.get('/workspaces/frameworks_and_languages_module/client', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html') );
+//app.get('/workspaces/frameworks_and_languages_module/client', (req, res) => {
+  //res.sendFile(path.join(__dirname, '/index.html') );
+//})
+
+app.get('/',  (req, res) => {
+    res.sendFile('index.html',{root: __dirname});
 })
 
 app.listen(port, () => {
