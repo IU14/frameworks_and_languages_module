@@ -4,15 +4,14 @@ const port = 8000
 const path = require('path');
 //const cors = require('cors')
 
+//app.use(cors())
 
-//app.get('/workspaces/frameworks_and_languages_module/client', (req, res) => {
-  //res.sendFile(path.join(__dirname, '/index.html') );
-//})
-
-app.get('/',  (req, res) => {
-    res.sendFile('index.html',{root: __dirname});
+//gets HTML from the client directory
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname,'../client/index.html') );
 })
 
+// sets up ITEM 
 const ITEM = [
   {
   "id": 0,
@@ -31,10 +30,12 @@ const ITEM = [
   }
 ]
 
+// returns item using CURL
 app.get('/item', (req, res) => {
   res.json(ITEM)
 })
 
+// posts items 
 app.post('/item', (req, res) => {
   res.status(201).json()
 })
@@ -42,3 +43,4 @@ app.post('/item', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+

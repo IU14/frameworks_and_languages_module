@@ -1,10 +1,12 @@
-FROM python
+FROM node:alpine
 
 WORKDIR /app/
 
-RUN pip install falcon
-RUN pip install gunicorn
+
+COPY package.json ./
+RUN npm install
+RUN npm install cors
 
 COPY . .
 
-CMD ["python", "myfalcon.py"]
+ENTRYPOINT ["node", "server.js"]
