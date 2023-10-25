@@ -2,9 +2,11 @@ const express = require('express')
 const app = express()
 const port = 8000
 const path = require('path');
-//const cors = require('cors')
+//const cors = require('cors');
 
-//app.use(cors())
+//app.use(cors());
+
+app.use(express.json());
 
 //gets HTML from the client directory
 app.get('/', (req, res) => {
@@ -12,10 +14,10 @@ app.get('/', (req, res) => {
 })
 
 // sets up ITEM 
-const ITEM = [
+let ITEM = [
   {
   "id": 0,
-  "user_id": "user1234",
+  "user_id": "user1234", 
   "keywords": [
     "hammer",
     "nails",
@@ -30,17 +32,39 @@ const ITEM = [
   }
 ]
 
-// returns item using CURL
+// returns item 
 app.get('/item', (req, res) => {
   res.json(ITEM)
 })
 
+//returns item by item ID
+//item ID is auto generated 
+
+
+
 // posts items 
 app.post('/item', (req, res) => {
-  res.status(201).json()
+  if (Object.keys(req.body).sort().toString() != "description,image,keywords,lat,lon,user_id") {
+    return res.status(405).json()
+  }
+    ITEM.push(req.body)
+    res.status(201).json(req.body)
+})
+
+// delete item
+app.delete('/item/:id', (req, res) => {
+  ITEM = ITEM.filter((item)=> item.id!=req.params.id)
+  res.status(204).json()
 })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+/* to do:
+return item by item ID
+CORS (failed test)
+get the automated fields set up & working (failed test)
+return HTML to the user (failed test)
+recording 52 
+*/ 
