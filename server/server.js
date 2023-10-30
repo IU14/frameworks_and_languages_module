@@ -7,54 +7,74 @@ const port = 8000
 app.use(express.json())
 app.use(cors())
 
+const dateStamp = new Date();
 
 //gets HTML from the client directory
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'../client/index.html') );
 })
 
-// sets up ITEM dictionary
+// sets up ITEM 
 ITEM = {
-  1:
-  {
-    "id": 1,
-    "user_id": "user1234", 
-    "keywords": [
-      "hammer",
-      "nails",
-      "tools"
-    ],
-    "description": "A hammer and nails set",
-    "image": "https://placekitten.com/200/300",
-    "lat": 51.2798438,
-    "lon": 1.0830275,
-    "date_from": "2023-10-22T17:38:31.805Z",
-    "date_to": "2023-10-22T17:38:31.805Z"
-  }
+  1: {
+      "id": 1,
+      "user_id": "user1234", 
+      "keywords": [
+        "hammer",
+        "nails",
+        "tools"
+      ],
+      "description": "A hammer and nails set",
+      "image": "https://placekitten.com/200/300",
+      "lat": 51.2798438,
+      "lon": 1.0830275,
+      "date_from": dateStamp.toISOString(),
+      "date_to": dateStamp.toISOString(),
+  },
+  //2: {},
+};
+/*
+ITEM[3] = {
 }
-
-app.getMaxListeners('/',  (req, res)=>
-{NEXT_ID = max(ITEM.keys()+1) })
-// max is not defined
+delete ITEM[3]
+ITEM.hasOwnProperty(3)
+*/
 
 // returns item 
 app.get('/item', (req, res) => {
   res.json(ITEM)
 })
 
-//returns item by item ID
-//item ID is auto generated 
-
-
 
 // posts items 
 app.post('/item', (req, res) => {
-  if (Object.keys(req.body).sort().toString() != "description,image,keywords,lat,lon,user_id") {
-    return res.status(405).json()
+
+  const reqFields =["user_id","keywords","description","lat","lon"];
+  //const dateStamp = new Date();
+
+  if (!reqFields.every(field=> req.body.hasOwnProperty(field)))
+  {
+    console.log("Missing data")
+    return res.status (405).json()
   }
-    ITEM.push(req.body)
-    res.status(201).json(req.body)
+ 
+  const newITEM = {
+      "id": Math.random,
+      "user_id": req.params.user_id,
+      "keywords": req.params.keywords,
+      "description": req.params.description,
+      "image" : req.params.image,
+      "lat": req.params.lat,
+      "lon": req.params.lon,
+      "date_from" : dateStamp.toISOString(), 
+      "date_to": dateStamp.toISOString(),
+  };
+
+    ITEM[newITEM]
+    res.status(201).json(ITEM)
+    console.log(ITEM)
 })
+
 
 // delete item
 app.delete('/item/:id', (req, res) => {
@@ -71,8 +91,7 @@ app.listen(port, () => {
 return item by item ID
 get the automated fields set up & working (failed test) - item_id, dates 
 return HTML to the user (failed test)
-image field is optional*
-time stamp - ISO standard date time
+
 
 recording 54
 */ 
