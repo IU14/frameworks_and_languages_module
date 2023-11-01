@@ -7,6 +7,9 @@ const port = 8000
 app.use(express.json())
 app.use(cors())
 
+app.use(express.urlencoded({extended: true}));
+app.use(express.json()) 
+
 const dateStamp = new Date();
 
 //gets HTML from the client directory
@@ -31,14 +34,9 @@ ITEM = {
       "date_from": dateStamp.toISOString(),
       "date_to": dateStamp.toISOString(),
   },
-  //2: {},
+  
 };
-/*
-ITEM[3] = {
-}
-delete ITEM[3]
-ITEM.hasOwnProperty(3)
-*/
+
 
 // returns item 
 app.get('/item', (req, res) => {
@@ -50,27 +48,26 @@ app.get('/item', (req, res) => {
 app.post('/item', (req, res) => {
 
   const reqFields =["user_id","keywords","description","lat","lon"];
-  //const dateStamp = new Date();
-
+ 
   if (!reqFields.every(field=> req.body.hasOwnProperty(field)))
   {
     console.log("Missing data")
     return res.status (405).json()
   }
  
-  const newITEM = {
-      "id": Math.random,
-      "user_id": req.params.user_id,
-      "keywords": req.params.keywords,
-      "description": req.params.description,
-      "image" : req.params.image,
-      "lat": req.params.lat,
-      "lon": req.params.lon,
+  const newITEM = {};
+  
+  ITEM[newITEM] = {
+      "id": Math.random(),
+      "user_id": req.body.user_id,
+      "keywords":req.body.keywords,
+      "description": req.body.description,
+      "image" : req.body.image,
+      "lat": req.body.lat,
+      "lon": req.body.lon,
       "date_from" : dateStamp.toISOString(), 
       "date_to": dateStamp.toISOString(),
-  };
-
-    ITEM[newITEM]
+},
     res.status(201).json(ITEM)
     console.log(ITEM)
 })
@@ -78,9 +75,14 @@ app.post('/item', (req, res) => {
 
 // delete item
 app.delete('/item/:id', (req, res) => {
-  // const id = parseFloat(req.params.id)
-  ITEM = ITEM.filter((item)=> item.id!=req.params.id)
-  res.status(204).json()
+  const id = parseFloat(req.params.id)
+
+  if (id == req.params.id){
+    delete ITEM
+    console.log("Item deleted") 
+    return res.status(204).json()
+    
+  }
 })
 
 app.listen(port, () => {
@@ -89,9 +91,7 @@ app.listen(port, () => {
 
 /* to do:
 return item by item ID
-get the automated fields set up & working (failed test) - item_id, dates 
 return HTML to the user (failed test)
-
-
+ISSUE: when posting an object states its an [object object] and not the item number therefore getting a failure. 
 recording 54
 */ 
