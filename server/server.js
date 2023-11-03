@@ -8,9 +8,10 @@ app.use(express.json())
 app.use(cors())
 
 app.use(express.urlencoded({extended: true}));
-app.use(express.json()) 
+
 
 const dateStamp = new Date();
+const currentDate = dateStamp.toISOString()
 
 //gets HTML from the client directory
 app.get('/', (req, res) => {
@@ -39,7 +40,6 @@ ITEM = {
   
 };
 
-
 // returns item by item id
 app.get('/item/:id', (req, res) => {
   const id = req.params.id
@@ -65,8 +65,7 @@ app.get('/items', (req, res) => {
 
 // posts items 
 app.post('/item', (req, res, next) => {
-
-  const reqFields =["user_id","keywords","description","lat","lon"];
+  const reqFields =["user_id","keywords","description","lat","lon"]; // checks for req fields 1st
  
   if (!reqFields.every(field=> req.body.hasOwnProperty(field)))
   {
@@ -74,6 +73,7 @@ app.post('/item', (req, res, next) => {
     return res.status(405).json()
   }
  
+  // creates new obj & make sure the ID becomes the key to obj
   const newITEM = {};
   const newID= Math.random();
 
@@ -81,6 +81,7 @@ app.post('/item', (req, res, next) => {
     newITEM[key] = value;
   }
 
+  // takes the input & creates
   ITEM[newID] = {
     "id": newID,
     "user_id": req.body.user_id,
@@ -89,7 +90,7 @@ app.post('/item', (req, res, next) => {
     "image" : req.body.image,
     "lat": req.body.lat,
     "lon": req.body.lon,
-    "date_from" : dateStamp.toISOString(), 
+    "date_from" : currentDate, 
     "date_to": dateStamp.toISOString(),
 
 },
@@ -100,7 +101,7 @@ app.post('/item', (req, res, next) => {
 
 // delete item
 app.delete('/item/:id', (req, res) => {
-  const id = req.params.id
+  const id = req.params.id  // takes the input and checks it exits & deletes if it does
 
   if (ITEM[id]){
     delete ITEM
@@ -120,7 +121,7 @@ app.listen(port, () => {
 failed tests as of 3/11:
 Base endpoint should return html of some form to the user. 
 After POSTing an item, a GET to /items should have our new item as a last entry of the list/array
-date_from has been created and is a pauseable ISO datetime
+date_from has been created and is a pauseable ISO datetime [done, I think]
 Create new_item and check that it appears in the items list
 recording 54
 */ 
