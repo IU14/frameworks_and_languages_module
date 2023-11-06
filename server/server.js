@@ -6,18 +6,24 @@ const port = 8000
 
 app.use(express.json())
 app.use(cors())
-
 app.use(express.urlencoded({extended: true}));
 
+//const dateStamp = new Date();
+//const currentDate = dateStamp.toISOString()
+const isoDate = new Date().toISOString()
 
-const dateStamp = new Date();
-const currentDate = dateStamp.toISOString()
+//gets HTML 
 
-//gets HTML from the client directory
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'../client/index.html') );
+    //res.sendFile('index.html', {root: __dirname}); 
+    res.send("Hello world")
 
-  res.status(200)
+    //find video on this
+
+    //const DEFAULT_API = '/api/v1';  // default to current http(s)://currentHost:currentPort/api/v1'
+    //const urlParams = new URLSearchParams(window.location.search);
+    //const urlAPI = (urlParams.get('api') || DEFAULT_API).replace(/\/$/, '');  // Get api url (and remove trailing slash if present)
+
 })
 
 // sets up ITEM 
@@ -34,11 +40,13 @@ ITEM = {
       "image": "https://placekitten.com/200/300",
       "lat": 51.2798438,
       "lon": 1.0830275,
-      "date_from": dateStamp.toISOString(),
-      "date_to": dateStamp.toISOString(),
+      "date_from": isoDate,
+      "date_to": isoDate,
   },
   
 };
+
+const list = Object.keys(ITEM).map((key) => [key, ITEM[key]]);
 
 // returns item by item id
 app.get('/item/:id', (req, res) => {
@@ -57,7 +65,7 @@ app.get('/item/:id', (req, res) => {
 
 // returns list
 app.get('/items', (req, res) => {
-  const list = Object.keys(ITEM).map((key) => [key, ITEM[key]]);
+  //const list = Object.keys(ITEM).map((key) => [key, ITEM[key]]);
 
   res.status(200).json(list)
   console.log(list)
@@ -90,12 +98,15 @@ app.post('/item', (req, res, next) => {
     "image" : req.body.image,
     "lat": req.body.lat,
     "lon": req.body.lon,
-    "date_from" : currentDate, 
-    "date_to": dateStamp.toISOString(),
+    "date_from" : isoDate, 
+    "date_to": isoDate,
 
 },
+    list.push(ITEM)
     res.status(201).json(ITEM[newID])
-    console.log(ITEM)
+    if (list.includes(ITEM)){
+      console.log ("Item exists")
+    }
 })
 
 
@@ -104,7 +115,7 @@ app.delete('/item/:id', (req, res) => {
   const id = req.params.id  // takes the input and checks it exits & deletes if it does
 
   if (ITEM[id]){
-    delete ITEM
+    delete ITEM[id]
     console.log("Item deleted") 
     return res.status(204).json()
     }
@@ -120,8 +131,8 @@ app.listen(port, () => {
 /* to do:
 failed tests as of 3/11:
 Base endpoint should return html of some form to the user. 
-After POSTing an item, a GET to /items should have our new item as a last entry of the list/array
-date_from has been created and is a pauseable ISO datetime [done, I think]
-Create new_item and check that it appears in the items list
+After POSTing an item, a GET to /items should have our new item as a last entry of the list/array [done]
+date_from has been created and is a pauseable ISO date time 
+Create new_item and check that it appears in the items list 
 recording 54
 */ 
