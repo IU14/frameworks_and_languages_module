@@ -10,8 +10,7 @@ app.use(express.urlencoded({extended: true}));
 
 const isoDate = new Date().toISOString()
 
-//gets HTML 
-
+//gets HTML - to complete
 app.get('/', (req, res) => {
     //res.sendFile('index.html', {root: __dirname}); 
     res.send("Hello world")
@@ -24,7 +23,7 @@ app.get('/', (req, res) => {
 
 })
 
-// sets up ITEM 
+// sets up ITEM objects
 ITEM = {
   1: {
       "id": 1,
@@ -59,13 +58,13 @@ app.get('/item/:id', (req, res) => {
     return res.status(200).json(ITEM[id])
 })
 
-// returns list
+// returns all of the items
 app.get('/items', (req, res) => {
   res.status(200).json(Object.values(ITEM))
   console.log(ITEM)
 })
 
-// posts items 
+// creates item and posts it 
 app.post('/item', (req, res, next) => {
   const reqFields =["user_id","keywords","description","lat","lon"]; // checks for req fields 1st
  
@@ -101,7 +100,7 @@ app.post('/item', (req, res, next) => {
 })
 
 
-// delete item
+// deletes item by item id
 app.delete('/item/:id', (req, res) => {
   const id = req.params.id  // takes the input and checks it exits & deletes if it does
 
@@ -120,10 +119,10 @@ app.listen(port, () => {
 })
 
 /* to do:
-failed tests as of 3/11:
+failed tests as of 6/11:
+*technically none* 
 Base endpoint should return html of some form to the user. 
-After POSTing an item, a GET to /items should have our new item as a last entry of the list/array [done]
-date_from has been created and is a pauseable ISO date time 
-Create new_item and check that it appears in the items list [done] 
+but I know that the html get is not as it should be. 
+
 recording 54
 */ 
