@@ -13,7 +13,7 @@ const isoDate = new Date().toISOString()
 //gets HTML - to complete
 app.get('/', (req, res) => {
     //res.sendFile('index.html', {root: __dirname}); 
-    res.send("Hello world")
+    res.send("Welcome to the the FreeCycle website")
 
     //find video on this
 

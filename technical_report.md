@@ -2,6 +2,7 @@ Technical Report
 ================
 
 (intro describing purpose of report - 200ish words)
+This report is intended to detail and explain what languages, frameworks and features have been used for the server and client side domains of the FreeCycle website. 
 
 
 Critique of Server/Client prototype
