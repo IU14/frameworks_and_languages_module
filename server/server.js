@@ -8,8 +8,6 @@ app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({extended: true}));
 
-//const dateStamp = new Date();
-//const currentDate = dateStamp.toISOString()
 const isoDate = new Date().toISOString()
 
 //gets HTML 
@@ -46,8 +44,6 @@ ITEM = {
   
 };
 
-const list = Object.keys(ITEM).map((key) => [key, ITEM[key]]);
-
 // returns item by item id
 app.get('/item/:id', (req, res) => {
   const id = req.params.id
@@ -65,10 +61,8 @@ app.get('/item/:id', (req, res) => {
 
 // returns list
 app.get('/items', (req, res) => {
-  //const list = Object.keys(ITEM).map((key) => [key, ITEM[key]]);
-
-  res.status(200).json(list)
-  console.log(list)
+  res.status(200).json(Object.values(ITEM))
+  console.log(ITEM)
 })
 
 // posts items 
@@ -102,11 +96,8 @@ app.post('/item', (req, res, next) => {
     "date_to": isoDate,
 
 },
-    list.push(ITEM)
     res.status(201).json(ITEM[newID])
-    if (list.includes(ITEM)){
-      console.log ("Item exists")
-    }
+    console.log(Object.entries(ITEM[newID]))
 })
 
 
@@ -133,6 +124,6 @@ failed tests as of 3/11:
 Base endpoint should return html of some form to the user. 
 After POSTing an item, a GET to /items should have our new item as a last entry of the list/array [done]
 date_from has been created and is a pauseable ISO date time 
-Create new_item and check that it appears in the items list 
+Create new_item and check that it appears in the items list [done] 
 recording 54
 */ 
