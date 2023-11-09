@@ -1,0 +1,136 @@
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+  </script>
+
+  
+  <div id="app">
+    <h1>{{ message }}</h1>
+  
+    <h2> Set up your item to sell </h2>
+    <form  @submit.prevent="postItem">
+      <input v-model="item.user_id"  Id ="user_id" placeholder="Enter your User Id"/>
+      <input v-model="item.keywords" Keywords ="Keywords" placeholder="Enter Item keywords"/>
+      <input v-model="item.description" Description = "description" placeholder="Enter item description"/>
+      <input v-model="item.image" Image ="image" placeholder="image address (optional)"/>
+      <input V-model="item.lat" Lat = "lat" placeholder="enter lat"/>
+      <input v-model="item.lon" Lon = "lon" placeholder="enter lon"/>
+      <button>Create Item</button>
+      {{item.user_id}}
+    </form>
+
+    <h3>Current items available:</h3>
+    <ul>
+      <li v-for="item for list">
+        <span>{{item.description}}</span>
+        <span>{{item.keywords}}</span>
+        <span>{{item.image}}</span>
+        <button @click ="deleteItem(item.id)">Delete</button>
+      </li>
+    </ul>
+
+  </div>
+
+  <script type="module">
+    import { createApp, ref } from 'vue'
+  
+    createApp({
+      data() {return {
+          message: 'Welcome to FreeCycle',
+          item: {id: 0, user_id: '', keywords: [''], description: '', image: '', lat: '', lon: '', date_from: new Date().toISOString(), date_to: new Date().toISOString(),},
+          list: [1,2,3]
+        }},
+      created(){
+          this.clearForm()
+          this.getItems()
+      } ,
+
+      methods: {
+          clearForm() {
+            this.item.id = Math.random()
+            this.item.user_id= ''
+            this.item.keywords =''
+            this.item.description =''
+            this.item.image =''
+            this.item.lat =''
+            this.item.lon =''
+          },
+
+          postItem() {
+            console.log(this.item)
+
+            fetch(`/item`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(this.item),
+            })
+                .then(response => response.json())
+                .then(json => console.log('Item created', json))
+                .then(() => this.clearForm())
+                .then(()=> this.getItems())
+            .catch(err => console.error(err));
+
+          },
+
+          getItems() {
+
+            fetch(`/items`, {
+                  method: 'GET',
+            })
+                .then(response => response.json())
+                .then(json => {
+                    console.log("get works", json)
+                    this.list = json  // save the json we got back into the variable `items`
+            })
+              .catch(err => console.error(err))
+          },
+
+          getItem(id) {
+
+            fetch ('/item/${item_id}', {
+                  method: 'GET',
+            })
+                .then(response => response.json())
+            .catch(err => console.error(err))
+              
+          },
+
+          deleteItem(id) {
+
+            fetch(`/item/${item_id}`, {
+                  method: 'DELETE',
+        })
+            .then(json => console.log('item deleted', json))
+            .then(()=> this.getItems())
+            .catch(err => console.error(err));
+        }
+      
+        },
+
+    }).mount('#app')
+
+  </script>
+
+
+<!---Comment
+todo:
+  link the fetches to the server URL. 
+  From the help docs:
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
+  running client server? python3 -m http.server 8001 - have to then put client.html in the address
+  as tries to run  "GET /item.image HTTP/1.1" -  not sure what this is and it pulls up sample client html
+  the fetch does not work 'failed to load resources'
+  once post works
+  need to get item by item id
+  delete item button
+  deleItem() delete section
+
+   python3 -m http.server 8001
+-->
+  
+
+

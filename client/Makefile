@@ -1,7 +1,11 @@
-DOCKER_IMAGE:=client
+#DOCKER_IMAGE:=client
 
-build:
-	docker build --tag ${DOCKER_IMAGE} .
+#build:
+	
 
-run:
-	docker run --rm -it --publish 8001:8001 ${DOCKER_IMAGE}
+#run:
+	
+
+run_local:
+	python3 -m http.server 8001
+
