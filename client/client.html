@@ -8,7 +8,7 @@
 
   
   <div id="app">
-    <h1>{{ message }}</h1>
+    <h1>Welcome to FreeCycle</h1>
   
     <h2> Set up your item to sell </h2>
     <form  @submit.prevent="postItem">
@@ -36,10 +36,16 @@
 
   <script type="module">
     import { createApp, ref } from 'vue'
-  
+
+    // variables 
+
+    const url = new URL ('https://musical-bassoon-59gxg579j563p7j9-8000.app.github.dev')
+
+    const urlParams = new URLSearchParams(url.window.location.search);
+    const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
+    
     createApp({
       data() {return {
-          message: 'Welcome to FreeCycle',
           item: {id: 0, user_id: '', keywords: [''], description: '', image: '', lat: '', lon: '', date_from: new Date().toISOString(), date_to: new Date().toISOString(),},
           list: [1,2,3]
         }},
@@ -61,7 +67,6 @@
 
           postItem() {
             console.log(this.item)
-
             fetch(`/item`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -76,7 +81,6 @@
           },
 
           getItems() {
-
             fetch(`/items`, {
                   method: 'GET',
             })
@@ -89,7 +93,6 @@
           },
 
           getItem(id) {
-
             fetch ('/item/${item_id}', {
                   method: 'GET',
             })
@@ -118,16 +121,18 @@
 <!---Comment
 todo:
   link the fetches to the server URL. 
-  From the help docs:
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
-  running client server? python3 -m http.server 8001 - have to then put client.html in the address
-  as tries to run  "GET /item.image HTTP/1.1" -  not sure what this is and it pulls up sample client html
-  the fetch does not work 'failed to load resources'
+  
   once post works
   need to get item by item id
   delete item button
   deleItem() delete section
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
+
+  {{item.user_id}} shows like {{item.user_id}} on webpage 
+
+  server URL/items
 
    python3 -m http.server 8001
 -->
