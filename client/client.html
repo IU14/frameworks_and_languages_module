@@ -19,7 +19,6 @@
       <input V-model="item.lat" Lat = "lat" placeholder="enter lat"/>
       <input v-model="item.lon" Lon = "lon" placeholder="enter lon"/>
       <button>Create Item</button>
-      {{item.user_id}}
     </form>
 
     <h3>Current items available:</h3>
@@ -39,14 +38,16 @@
 
     // variables 
 
-    const url = new URL ('https://musical-bassoon-59gxg579j563p7j9-8000.app.github.dev')
+    const url = new URL ('https://musical-bassoon-59gxg579j563p7j9-8001.app.github.dev/?api=musical-bassoon-59gxg579j563p7j9-8000.app.github.dev')
+
+    // https://musical-bassoon-59gxg579j563p7j9-8001.app.github.dev/?api=https://musical-bassoon-59gxg579j563p7j9-8000.app.github.dev
 
     const urlParams = new URLSearchParams(url.window.location.search);
     const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
     
     createApp({
       data() {return {
-          item: {id: 0, user_id: '', keywords: [''], description: '', image: '', lat: '', lon: '', date_from: new Date().toISOString(), date_to: new Date().toISOString(),},
+          item: {id: Math.random(), user_id: '', keywords: [''], description: '', image: '', lat: '', lon: '', date_from: new Date().toISOString(), date_to: new Date().toISOString(),},
           list: [1,2,3]
         }},
       created(){
@@ -72,6 +73,7 @@
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(this.item),
             })
+                .then(this.list.push(this.item))
                 .then(response => response.json())
                 .then(json => console.log('Item created', json))
                 .then(() => this.clearForm())
@@ -87,7 +89,7 @@
                 .then(response => response.json())
                 .then(json => {
                     console.log("get works", json)
-                    this.list = json  // save the json we got back into the variable `items`
+                    this.list = json 
             })
               .catch(err => console.error(err))
           },
