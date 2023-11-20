@@ -66,6 +66,7 @@ app.get('/items', (req, res) => {
 
 // creates item and posts it 
 app.post('/item', (req, res, next) => {
+  console.log(req.body)
   const reqFields =["user_id","keywords","description","lat","lon"]; // checks for req fields 1st
  
   if (!reqFields.every(field=> req.body.hasOwnProperty(field)))
@@ -96,7 +97,7 @@ app.post('/item', (req, res, next) => {
 
 },
     res.status(201).json(ITEM[newID])
-    console.log(Object.entries(ITEM[newID]))
+    console.log(ITEM)
 })
 
 

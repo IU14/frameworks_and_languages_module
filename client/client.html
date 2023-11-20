@@ -5,7 +5,6 @@
       }
     }
   </script>
-
   
   <div id="app">
     <h1>Welcome to FreeCycle</h1>
@@ -24,9 +23,9 @@
     <h3>Current items available:</h3>
     <ul>
       <li v-for="item for list">
-        <span>{{item.description}}</span>
-        <span>{{item.keywords}}</span>
-        <span>{{item.image}}</span>
+        <span >{{item.description}}</span>
+        <span >{{item.keywords}}</span>
+        <span >{{item.image}}</span>
         <button @click ="deleteItem(item.id)">Delete</button>
       </li>
     </ul>
@@ -36,28 +35,32 @@
   <script type="module">
     import { createApp, ref } from 'vue'
 
-    // variables 
-
-    const url = new URL ('https://musical-bassoon-59gxg579j563p7j9-8001.app.github.dev/?api=musical-bassoon-59gxg579j563p7j9-8000.app.github.dev')
-
-    // https://musical-bassoon-59gxg579j563p7j9-8001.app.github.dev/?api=https://musical-bassoon-59gxg579j563p7j9-8000.app.github.dev
-
-    const urlParams = new URLSearchParams(url.window.location.search);
+    // variables  
+    const urlParams = new URLSearchParams(window.location.search);
     const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
-    
+    console.log(urlAPI);
+
     createApp({
       data() {return {
-          item: {id: Math.random(), user_id: '', keywords: [''], description: '', image: '', lat: '', lon: '', date_from: new Date().toISOString(), date_to: new Date().toISOString(),},
-          list: [1,2,3]
-        }},
+          item: {
+            user_id: "", 
+            keywords: [""], 
+            description: "", 
+            image: "", 
+            lat: "", 
+            lon: "", 
+          list: [1,2,3],
+        }
+      } },
+
       created(){
-          this.clearForm()
+          //this.clearForm()
           this.getItems()
-      } ,
+      },
 
       methods: {
           clearForm() {
-            this.item.id = Math.random()
+            this.item.id = ''
             this.item.user_id= ''
             this.item.keywords =''
             this.item.description =''
@@ -67,35 +70,30 @@
           },
 
           postItem() {
-            console.log(this.item)
-            fetch(`/item`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(this.item),
-            })
-                .then(this.list.push(this.item))
-                .then(response => response.json())
-                .then(json => console.log('Item created', json))
-                .then(() => this.clearForm())
-                .then(()=> this.getItems())
-            .catch(err => console.error(err));
-
+              console.log(this.item)
+              fetch(`${urlAPI}/item`, {
+                  method: 'POST',
+                  headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify(this.item),
+              })
+                  .then(response => response.json())
+                  .then(json => console.log("Item created", json))
+              .catch(err => console.error(err))
           },
-
+ 
           getItems() {
-            fetch(`/items`, {
+            fetch(`${urlAPI}/items`, {
                   method: 'GET',
             })
                 .then(response => response.json())
-                .then(json => {
-                    console.log("get works", json)
+                .then(json => { console.log("get works", json) 
                     this.list = json 
             })
               .catch(err => console.error(err))
           },
-
-          getItem(id) {
-            fetch ('/item/${item_id}', {
+/**
+          getItem(id){
+            fetch (`${urlAPI}/item/${item_id}`, {
                   method: 'GET',
             })
                 .then(response => response.json())
@@ -103,15 +101,16 @@
               
           },
 
-          deleteItem(id) {
-
-            fetch(`/item/${item_id}`, {
+          deleteItem(id){
+            fetch(`${urlAPI}/item/${item_id}`, {
                   method: 'DELETE',
         })
             .then(json => console.log('item deleted', json))
             .then(()=> this.getItems())
             .catch(err => console.error(err));
         }
+
+**/
       
         },
 
@@ -122,15 +121,11 @@
 
 <!---Comment
 todo:
-  link the fetches to the server URL. 
-  
+    
   once post works
   need to get item by item id
   delete item button
   deleItem() delete section
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
 
   {{item.user_id}} shows like {{item.user_id}} on webpage 
 
