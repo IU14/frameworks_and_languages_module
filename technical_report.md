@@ -5,11 +5,14 @@ Technical Report
 This report is intended to detail and explain what languages, frameworks and features have been used for the server and client side domains of the FreeCycle website. 
 
 
+
+
 Critique of Server/Client prototype
 ---------------------
 
 ### Overview
-()
+
+The prototypes were created without using any framweworks 
 
 ### Socket / Network Handling
 
@@ -67,7 +70,7 @@ Using a framework that has inbuilt functions allows for this structure and unifo
 Server Framework Features
 -------------------------
 
-### CORS /Middlware 
+### CORS /Middleware 
 
 
 (Technical description of the feature - 40ish words)
@@ -80,10 +83,8 @@ What features are missing?
  CORS
 CORS? 
 
-https://github.com/IU14/frameworks_and_languages_module/blob/ac05f3d5a821fabf5a0852f9d04183fb752c349d/example_server/app/http_server.py#L71-L72 [default response]
-https://github.com/IU14/frameworks_and_languages_module/blob/ac05f3d5a821fabf5a0852f9d04183fb752c349d/example_server/app/web_utils.py#L48-L49 
 
-- they are spread over multiple locations and have insecure defaults. 
+Middleware is available in a number of frameworks as it is modular and reusable. There are many Middleware options for ExpressJS which help effectively manage tasks like request and response which is needed on the server side. 
 
 
 ### (name of Feature 2)
@@ -125,14 +126,43 @@ Server Language Features
 Client Framework Features
 -------------------------
 
-### (name of Feature 1)
+### Virtual DOM (Document object model)
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+VUeJs uses a virtual DOM which creates a replica of the DOM when changes are made.  These changes are made to the JS data structures, which is then compared to the original. With only the final changes get submitted to the real DOM. This means changes can be made at a faster rate and allows for good optimisation.
 
+https://www.tutorialspoint.com/vuejs/vuejs_overview.htm 
 
+The concept of a virtual DOM is to help with standard performance issues in a browser  as it only applies necessary changes and leaves the rest the same. This means faster updates to the user and therefore better user experience. 
+
+In VueJS a virtual DOM is based on a pattern that can look like this:
+
+```Javascript
+const vnode = {
+  type: 'div',
+  props: {
+    id: 'hello'
+  },
+  children: [
+    /* more vnodes */
+  ]
+}
+```
+https://vuejs.org/guide/extras/rendering-mechanism.html
+
+Within our client a virtual DOM could be considered as this:
+
+```Javascript
+
+     item: {
+            user_id: "", 
+            keywords: [""], 
+            description: "", 
+            image: "", 
+            lat: "", 
+            lon: "", 
+          list: [1,2,3],
+        }
+```
 
 ### (name of Feature 2)
 

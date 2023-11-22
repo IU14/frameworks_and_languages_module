@@ -107,13 +107,11 @@
           deleteItem(id){
             fetch(`${urlAPI}/item/${id}`, {
                   method: 'DELETE',
-        })
-            .then(json => console.log('item deleted', json))
-            .then(()=> this.getItems())
-        }
-
-      
-        },
+            })
+                .then(json => console.log('item deleted', json))
+                .then(()=> this.getItems())
+            }
+          },
 
     }).mount('#app')
 
