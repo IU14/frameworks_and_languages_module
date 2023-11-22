@@ -17,15 +17,15 @@
       <input v-model="item.image" Image ="image" placeholder="image address (optional)"/>
       <input V-model="item.lat" Lat = "lat" placeholder="enter lat"/>
       <input v-model="item.lon" Lon = "lon" placeholder="enter lon"/>
-      <button>Create Item</button>
+      <button data-action ="postItem">Create Item</button>
     </form>
 
     <h3>Current items available:</h3>
     <ul>
-      <li v-for="item for list">
-        <span >{{item.description}}</span>
-        <span >{{item.keywords}}</span>
-        <span >{{item.image}}</span>
+      <li v-for="item in list">
+        <span data-field ="description">{{item.description}}</span>
+        <span data-field="keywords">{{item.keywords}}</span>
+        <span data-field="image">{{item.image}}</span>
         <button @click ="deleteItem(item.id)">Delete</button>
       </li>
     </ul>
@@ -54,7 +54,7 @@
       } },
 
       created(){
-          //this.clearForm()
+          this.clearForm()
           this.getItems()
       },
 
@@ -78,7 +78,9 @@
               })
                   .then(response => response.json())
                   .then(json => console.log("Item created", json))
+              /**
               .catch(err => console.error(err))
+              **/
           },
  
           getItems() {
@@ -89,7 +91,9 @@
                 .then(json => { console.log("get works", json) 
                     this.list = json 
             })
+            /**
               .catch(err => console.error(err))
+              **/
           },
 /**
           getItem(id){
@@ -97,20 +101,17 @@
                   method: 'GET',
             })
                 .then(response => response.json())
-            .catch(err => console.error(err))
-              
-          },
 
+          },
+**/
           deleteItem(id){
-            fetch(`${urlAPI}/item/${item_id}`, {
+            fetch(`${urlAPI}/item/${id}`, {
                   method: 'DELETE',
         })
             .then(json => console.log('item deleted', json))
             .then(()=> this.getItems())
-            .catch(err => console.error(err));
         }
 
-**/
       
         },
 
@@ -120,16 +121,17 @@
 
 
 <!---Comment
-todo:
     
-  once post works
+  post works 22/11 (comment out the catch)
+  getitems works 22/11 (comment out the catch)
+  deleteitemworks 22/11 
+
+  to do:
+  show the UPDATED item list after posting
   need to get item by item id
-  delete item button
-  deleItem() delete section
 
-  {{item.user_id}} shows like {{item.user_id}} on webpage 
-
-  server URL/items
+  
+  https://musical-bassoon-59gxg579j563p7j9-8001.app.github.dev/client.html?api=https://musical-bassoon-59gxg579j563p7j9-8000.app.github.dev
 
    python3 -m http.server 8001
 -->
