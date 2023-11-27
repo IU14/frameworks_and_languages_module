@@ -1,0 +1,144 @@
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+</script>
+  
+  <div id="app">
+    <h1>Welcome to FreeCycle</h1>
+  
+    <h2> Set up your item to sell </h2>
+    <form  @submit.prevent="postItem">
+      <input v-model="item.user_id"  Id ="user_id" placeholder="Enter your User Id"/>
+      <input v-model="item.keywords" Keywords ="Keywords" placeholder="Enter Item keywords"/>
+      <input v-model="item.description" Description = "description" placeholder="Enter item description"/>
+      <input v-model="item.image" Image ="image" placeholder="image address (optional)"/>
+      <input V-model="item.lat" Lat = "lat" placeholder="enter lat"/>
+      <input v-model="item.lon" Lon = "lon" placeholder="enter lon"/>
+      <button data-action ="postItem">Create Item</button>
+    </form>
+
+    <h3>Current items available:</h3>
+    <ul>
+      <li v-for="item in list">
+        <span data-field ="description">{{item.description}}</span>
+        <span data-field="keywords">{{item.keywords}}</span>
+        <span data-field="image">{{item.image}}</span>
+        <button data-action="delete" @click="deleteItem(item.id)">Delete</button>
+      </li>
+    </ul>
+
+  </div>
+
+  <script type="module">
+    import { createApp, ref } from 'vue'
+
+    // variables  
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
+    console.log(urlAPI);
+   
+      createApp({
+        data() {return {
+            item: {
+              user_id: "", 
+              keywords: [""], 
+              description: "", 
+              image: "", 
+              lat: "", 
+              lon: "",             
+            },
+            list: [],
+        } },
+
+        created(){
+            this.getItems()
+            this.clearForm()
+        },
+
+        methods: {
+            clearForm() {
+              this.item ={...this.item,... {
+                user_id: "",
+                keywords: [""], 
+                description: "", 
+                image: "", 
+                lat: "", 
+                lon: "", 
+              }}
+            },
+
+            postItem() {
+              console.log(this.item)
+              fetch(`${urlAPI}/item`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(this.item),
+              })
+                    .then(response => response.json())
+                    .then(json => console.log("Item created", json))
+                    .then(()=>this.clearForm())
+                    .then(()=> this.getItems())
+              .catch(err => console.error(err))              
+            },
+  
+            getItems() {
+              fetch(`${urlAPI}/items`, {
+                    method: 'GET',
+              })
+                    .then(response => response.json())
+                    .then(json => {this.list = json })
+                    .then(json => console.log(this.list, json))
+              .catch(err => console.error(err))
+            },
+              
+            getItem(id){
+              fetch (`${urlAPI}/item/${item_id}`, {
+                    method: 'GET',
+              })
+                  .then(response => response.json())
+                  .then(response => console.log(this.item, json))
+              .catch(err => console.error(err))
+            },
+
+            deleteItem(id){
+              fetch(`${urlAPI}/item/${id}`, {
+                  method: 'DELETE',
+              })
+                  .then(json => console.log('item deleted', json))
+                  .then(()=> this.getItems())
+              .catch(err => console.error(err))            
+            },
+
+        },
+
+    }).mount('#app')
+    
+
+
+  </script>
+
+
+<!---Comment
+    
+  post works 22/11 
+  get items works 22/11 
+  delete works 27/11
+  item by item id works? 27/11
+
+  to do:
+   show the UPDATED item list after posting / deleting - only does so once page is refreshed
+  
+
+  
+  https://musical-bassoon-59gxg579j563p7j9-8001.app.github.dev/client.html?api=https://musical-bassoon-59gxg579j563p7j9-8000.app.github.dev
+
+   python3 -m http.server 8001
+
+   make sure ports are public!!! 
+-->
+  
+
+
