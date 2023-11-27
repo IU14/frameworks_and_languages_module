@@ -4,7 +4,7 @@
         "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
       }
     }
-  </script>
+</script>
   
   <div id="app">
     <h1>Welcome to FreeCycle</h1>
@@ -26,7 +26,7 @@
         <span data-field ="description">{{item.description}}</span>
         <span data-field="keywords">{{item.keywords}}</span>
         <span data-field="image">{{item.image}}</span>
-        <button @click ="deleteItem(item.id)">Delete</button>
+        <button data-action="delete" @click="deleteItem(item.id)">Delete</button>
       </li>
     </ul>
 
@@ -49,52 +49,51 @@
             image: "", 
             lat: "", 
             lon: "", 
-          list: [1,2,3],
+          list: [],
         }
       } },
 
       created(){
-          this.clearForm()
           this.getItems()
+          this.clearForm()
       },
 
       methods: {
           clearForm() {
-            this.item.id = ''
-            this.item.user_id= ''
-            this.item.keywords =''
-            this.item.description =''
-            this.item.image =''
-            this.item.lat =''
-            this.item.lon =''
+            this.item ={...this.item,... {
+              user_id: "",
+              keywords: [""], 
+              description: "", 
+              image: "", 
+              lat: "", 
+              lon: "", 
+            }}
           },
 
           postItem() {
-              console.log(this.item)
-              fetch(`${urlAPI}/item`, {
+            console.log(this.item)
+            fetch(`${urlAPI}/item`, {
                   method: 'POST',
                   headers: {'Content-Type': 'application/json'},
                   body: JSON.stringify(this.item),
-              })
+            })
                   .then(response => response.json())
                   .then(json => console.log("Item created", json))
-              /**
-              .catch(err => console.error(err))
-              **/
+                  .then(()=>this.clearForm())
+                  .then(()=> this.getItems())
+             
           },
  
           getItems() {
             fetch(`${urlAPI}/items`, {
                   method: 'GET',
             })
-                .then(response => response.json())
-                .then(json => { console.log("get works", json) 
-                    this.list = json 
-            })
-            /**
-              .catch(err => console.error(err))
-              **/
+                  .then(response => response.json())
+                  .then(json => {this.list = json })
+                  .then(json => console.log(this.list, json))
+
           },
+            
 /**
           getItem(id){
             fetch (`${urlAPI}/item/${item_id}`, {
@@ -106,32 +105,35 @@
 **/
           deleteItem(id){
             fetch(`${urlAPI}/item/${id}`, {
-                  method: 'DELETE',
+                method: 'DELETE',
             })
                 .then(json => console.log('item deleted', json))
                 .then(()=> this.getItems())
             }
           },
 
-    }).mount('#app')
+        }).mount('#app')
 
   </script>
 
 
 <!---Comment
     
-  post works 22/11 (comment out the catch)
-  getitems works 22/11 (comment out the catch)
-  deleteitemworks 22/11 
+  post works 22/11 
+  get items works 22/11 
+  delete works 27/11
 
   to do:
-  show the UPDATED item list after posting
+  
+  show the UPDATED item list after posting / deleting - only does so once page is refreshed
   need to get item by item id
 
   
   https://musical-bassoon-59gxg579j563p7j9-8001.app.github.dev/client.html?api=https://musical-bassoon-59gxg579j563p7j9-8000.app.github.dev
 
    python3 -m http.server 8001
+
+   make sure ports are public!!! 
 -->
   
 
