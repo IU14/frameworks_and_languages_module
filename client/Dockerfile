@@ -9,5 +9,5 @@ EXPOSE 8001
 #COPY nginx.conf /etc/nginx/nginx.conf
 #COPY client.html /client/
 
-COPY client.html .
+COPY index.html .
 CMD ["python3", "-m", "http.server", "8001"]

@@ -11,21 +11,25 @@
   
     <h2> Set up your item to sell </h2>
     <form  @submit.prevent="postItem">
-      <input v-model="item.user_id"  Id ="user_id" placeholder="Enter your User Id"/>
-      <input v-model="item.keywords" Keywords ="Keywords" placeholder="Enter Item keywords"/>
-      <input v-model="item.description" Description = "description" placeholder="Enter item description"/>
-      <input v-model="item.image" Image ="image" placeholder="image address (optional)"/>
-      <input V-model="item.lat" Lat = "lat" placeholder="enter lat"/>
-      <input v-model="item.lon" Lon = "lon" placeholder="enter lon"/>
-      <button data-action ="postItem">Create Item</button>
+      <input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
+      <input v-model="item.keywords" name ="keywords" placeholder="Enter Item keywords"/>
+      <input v-model="item.description" name ="description" placeholder="Enter item description"/>
+      <input v-model="item.image" name ="image" placeholder="image address (optional)"/>
+      <input V-model="item.lat" name ="lat" placeholder="enter lat"/>
+      <input v-model="item.lon" name ="lon" placeholder="enter lon"/>
+      <button data-action ="create_item">Create Item</button>
     </form>
 
     <h3>Current items available:</h3>
     <ul>
       <li v-for="item in list">
+        <span data-field="user_id">{{item.user_id}}</span>
         <span data-field ="description">{{item.description}}</span>
         <span data-field="keywords">{{item.keywords}}</span>
         <span data-field="image">{{item.image}}</span>
+        <span data-field="lat">{{item.lat}}</span>
+        <span data-field="lon">{{item.lon}}</span>
+        <span data-field="id">{{item.id}}</span>
         <button data-action="delete" @click="deleteItem(item.id)">Delete</button>
       </li>
     </ul>
@@ -122,16 +126,6 @@
 
 
 <!---Comment
-    
-  post works 22/11 
-  get items works 22/11 
-  delete works 27/11
-  item by item id works? 27/11
-
-  to do:
-   show the UPDATED item list after posting / deleting - only does so once page is refreshed
-  
-
   
   https://musical-bassoon-59gxg579j563p7j9-8001.app.github.dev/client.html?api=https://musical-bassoon-59gxg579j563p7j9-8000.app.github.dev
 
