@@ -39,11 +39,12 @@
   <script type="module">
     import { createApp, ref } from 'vue'
 
-    // variables  
+    // sets the URL to the URLAPI 
     const urlParams = new URLSearchParams(window.location.search);
     const urlAPI = (urlParams.get('api') || '/api/v1').replace(/\/$/, '');
     console.log(urlAPI);
    
+    // creates the application & creates the item and list
       createApp({
         data() {return {
             item: {
@@ -62,7 +63,9 @@
             this.clearForm()
         },
 
+      // the methods the client uses
         methods: {
+      // method to clear the form
             clearForm() {
               this.item ={...this.item,... {
                 user_id: "",
@@ -74,6 +77,7 @@
               }}
             },
 
+      // method that creates the item using the input
             postItem() {
               console.log(this.item)
               fetch(`${urlAPI}/item`, {
@@ -87,7 +91,7 @@
                     .then(()=> this.getItems())
               .catch(err => console.error(err))              
             },
-  
+      // method that gets the list of items 
             getItems() {
               fetch(`${urlAPI}/items`, {
                     method: 'GET',
@@ -97,7 +101,7 @@
                     .then(json => console.log(this.list, json))
               .catch(err => console.error(err))
             },
-              
+      // method that gets an item by it's ID     
             getItem(id){
               fetch (`${urlAPI}/item/${item_id}`, {
                     method: 'GET',
@@ -106,7 +110,7 @@
                   .then(response => console.log(this.item, json))
               .catch(err => console.error(err))
             },
-
+      // method that deletes the selected item 
             deleteItem(id){
               fetch(`${urlAPI}/item/${id}`, {
                   method: 'DELETE',

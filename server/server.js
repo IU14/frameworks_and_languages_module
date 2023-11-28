@@ -1,29 +1,28 @@
+// variables that import modules 
 const express = require('express')
 const path = require('path')
 const cors = require('cors')
+
+// variables declaring using the express framework and setting up the port for the server
 const app = express()
 const port = 8000
 
+// sets up imports that the application uses 
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({extended: true}));
 
+//variable that sets the dates to the ISO format 
 const isoDate = new Date().toISOString()
 
-//gets HTML - to complete
+//loads the application and launches 
 app.get('/', (req, res) => {
-    //res.sendFile('index.html', {root: __dirname}); 
+   
     res.send("Welcome to the the FreeCycle website")
-
-    //find video on this
-
-    //const DEFAULT_API = '/api/v1';  // default to current http(s)://currentHost:currentPort/api/v1'
-    //const urlParams = new URLSearchParams(window.location.search);
-    //const urlAPI = (urlParams.get('api') || DEFAULT_API).replace(/\/$/, '');  // Get api url (and remove trailing slash if present)
 
 })
 
-// sets up ITEM objects
+// sets up the ITEM object
 ITEM = {
   1: {
       "id": 1,
@@ -75,15 +74,17 @@ app.post('/item', (req, res, next) => {
     return res.status(405).json()
   }
  
-  // creates new obj & make sure the ID becomes the key to obj
+// Variable that creates a new object (ITEM) & make sure the ID becomes the key to object
   const newITEM = {};
+
+//variable that sets a random unique ID
   const newID= Math.random();
 
   for (let [key, value] of Object.entries(req.body)){
     newITEM[key] = value;
   }
 
-  // takes the input & creates
+// takes the input from the client & creates the object (ITEM) 
   ITEM[newID] = {
     "id": newID,
     "user_id": req.body.user_id,
@@ -101,7 +102,7 @@ app.post('/item', (req, res, next) => {
 })
 
 
-// deletes item by item id
+// deletes item by item id from the dictionary 
 app.delete('/item/:id', (req, res) => {
   const id = req.params.id  // takes the input and checks it exits & deletes if it does
 
@@ -118,12 +119,3 @@ app.delete('/item/:id', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-/* to do:
-failed tests as of 6/11:
-*technically none* 
-Base endpoint should return html of some form to the user. 
-but I know that the html get is not as it should be. 
-
-recording 54
-*/ 
