@@ -1,9 +1,9 @@
-// variables that import modules 
+// variables that import modules required for the server to run
 const express = require('express')
 const path = require('path')
 const cors = require('cors')
 
-// variables declaring using the express framework and setting up the port for the server
+// variables that declare use of the express framework and setting up the port for the server
 const app = express()
 const port = 8000
 
@@ -42,7 +42,7 @@ ITEM = {
   
 };
 
-// returns item by item id
+// function that returns item by item id
 app.get('/item/:id', (req, res) => {
   const id = req.params.id
 
@@ -57,16 +57,16 @@ app.get('/item/:id', (req, res) => {
     return res.status(200).json(ITEM[id])
 })
 
-// returns all of the items
+// function that returns all of the items
 app.get('/items', (req, res) => {
   res.status(200).json(Object.values(ITEM))
   console.log(ITEM)
 })
 
-// creates item and posts it 
+// function creates item and posts it - also checks all the required fields are present before creating 
 app.post('/item', (req, res, next) => {
   console.log(req.body)
-  const reqFields =["user_id","keywords","description","lat","lon"]; // checks for req fields 1st
+  const reqFields =["user_id","keywords","description","lat","lon"]; 
  
   if (!reqFields.every(field=> req.body.hasOwnProperty(field)))
   {

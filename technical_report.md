@@ -1,10 +1,9 @@
 Technical Report
 ================
 
-(intro describing purpose of report - 200ish words)
-This report is intended to detail and explain what languages, frameworks and features have been used for the server and client side domains of the FreeCycle website. 
+This report is intended to detail and explain what languages, frameworks and features have been used for the server and client side domains of the FreeCycle website.  
 
-
+Firstly, the report will detail why the prototype server and client are not appropriate for this project & why and will then discuss what features of the frameworks and languages have been used and why. 
 
 
 Critique of Server/Client prototype
@@ -12,7 +11,11 @@ Critique of Server/Client prototype
 
 ### Overview
 
-The prototypes were created without using any framweworks 
+Frameworks were developed as a time saving method for developers,they offer consistency within the codebase itself as well as security and scalability. https://www.linkedin.com/pulse/exploring-advantages-disadvantages-incorporating-frameworks-juste/  
+
+However, if the project is small enough, the developers may be able to get away without using a framework at all. But, this can create issues down the line if the project is passed to a different development team as the codebase may not be consistent which creates more work and takes time to learn, and therefore it is harder to maintain.   
+
+The prototypes for this project were created without using a framework. 
 
 ### Socket / Network Handling
 
@@ -60,12 +63,10 @@ ROUTES = (
 This routing code only allows to route from the URL path, which is currently global and in one place. Using regular expressions will struggle to chain them to others making this not expandable. Frameworks allow us to route on a variety of things.
 
 ### Recommendation
-(why the existing implementation should not be used - 40ish words)
-(suggested direction - frameworks 40ish words)
 
-The existing implementation offers no structure to the code base. As well as not saving the data once created. The client.html document here has no structure, the layout, buttons & functions are all over the place making in incoherant and hard to understand.
+The prototypes implementation offers no structure to the code base. As well as not saving the data once created. The client.html document here has no structure, the layout, buttons & functions have been placed haphazardly in the codebase, making it incoherent and hard to understand.
 
-Using a framework that has inbuilt functions allows for this structure and uniformity, making the code base far more readable and understandable. It allows for concise code. 
+Using a framework that has inbuilt functions allows for structure and uniformity, making the code base far more readable and understandable. It allows for concise code which is important for maintenance and stability. 
 
 Server Framework Features
 -------------------------

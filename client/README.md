@@ -5,8 +5,8 @@ This client uses vuejs framework to run the FreeCycle website. It is hosted on l
 
 ### To Run
 
-After running the server, in a new terminal open the client directory "cd client", using the command "python3 -m http.server 8001" or just enter "run" to run the client and then make sure the visibility is public.   
-Open up the webpage, and at the end of the url remove the / replace it with ?api= and paste the server url, hit enter. This will refresh the page joining it to the server. 
+After running the server, in a new terminal open the client directory "cd client", using the command "python3 -m http.server 8001" or just enter "run" in the terminal to run the client and then make sure the visibility is public.   
+Open up the webpage, and at the end of the url remove the / ,.replace it with ?api= and paste the server url, hit enter. This will refresh the page joining it to the server. 
 
 
 ### To Use
