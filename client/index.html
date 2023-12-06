@@ -1,40 +1,55 @@
-<script type="importmap">
-    {
-      "imports": {
-        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
-      }
-    }
-</script>
-  
-  <div id="app">
-    <h1>Welcome to FreeCycle</h1>
-  
-    <h2> Set up your item to sell </h2>
-    <form  @submit.prevent="postItem">
-      <input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
-      <input v-model="item.keywords" name ="keywords" placeholder="Enter Item keywords"/>
-      <input v-model="item.description" name ="description" placeholder="Enter item description"/>
-      <input v-model="item.image" name ="image" placeholder="image address (optional)"/>
-      <input V-model="item.lat" name ="lat" placeholder="enter lat"/>
-      <input v-model="item.lon" name ="lon" placeholder="enter lon"/>
-      <button data-action ="create_item">Create Item</button>
-    </form>
+<!doctype html>
+<html lang="en">
+  <!-- set up of skeleton layout framework-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <h3>Current items available:</h3>
-    <ul>
-      <li v-for="item in list">
-        <span data-field="user_id">{{item.user_id}}</span>
-        <span data-field ="description">{{item.description}}</span>
-        <span data-field="keywords">{{item.keywords}}</span>
-        <span data-field="image">{{item.image}}</span>
-        <span data-field="lat">{{item.lat}}</span>
-        <span data-field="lon">{{item.lon}}</span>
-        <span data-field="id">{{item.id}}</span>
-        <button data-action="delete" @click="deleteItem(item.id)">Delete</button>
-      </li>
-    </ul>
+    <title>FreeCycle</title>
+  </head>
 
-  </div>
+  <body>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+    </script>
+      
+      <div id="app">
+        <h1>Welcome to FreeCycle</h1>
+      
+        <h2> Set up your item to sell </h2>
+        <form  @submit.prevent="postItem">
+          <input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
+          <input v-model="item.keywords" name ="keywords" placeholder="Enter Item keywords"/>
+          <input v-model="item.description" name ="description" placeholder="Enter item description"/>
+          <input v-model="item.image" name ="image" placeholder="image address (optional)"/>
+          <input V-model="item.lat" name ="lat" placeholder="enter lat"/>
+          <input v-model="item.lon" name ="lon" placeholder="enter lon"/>
+          <button data-action ="create_item">Create Item</button>
+        </form>
+
+        <h3>Current items available:</h3>
+        <ul>
+          <li v-for="item in list">
+            <span data-field="user_id">{{item.user_id}}</span>
+            <span data-field ="description">{{item.description}}</span>
+            <span data-field="keywords">{{item.keywords}}</span>
+            <span data-field="image">{{item.image}}</span>
+            <span data-field="lat">{{item.lat}}</span>
+            <span data-field="lon">{{item.lon}}</span>
+            <span data-field="id">{{item.id}}</span>
+            <button data-action="delete" @click="deleteItem(item.id)">Delete</button>
+          </li>
+        </ul>
+
+      </div>
+
+  </body>
+</html>
 
   <script type="module">
     import { createApp, ref } from 'vue'
