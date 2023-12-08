@@ -68,40 +68,62 @@ The prototypes implementation offers no structure to the code base. As well as n
 
 Using a framework that has inbuilt functions allows for structure and uniformity, making the code base far more readable and understandable. It allows for concise code which is important for maintenance and stability. 
 
+The Express JS Framework has been chosen for the sever, VueJs has been selected for the client and Skeleton has been used for the layout Framework.
+
 Server Framework Features
 -------------------------
 
-### CORS /Middleware 
+### CORS / Middleware 
+
+(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+
+Most frameworks offer some form of middleware as it is modular and reusable. CORS is a middleware used by Express that allows for cross origin resource sharing allowing restricted resources to be accessed from another domain. 
+https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+
+```javascript
+const cors = require('cors')
+
+app.use(cors())
+```
+Once installed only two lines of code is required for CORS to run in Express. 
+
+CORS is a browser friendly security feature that allows access to the API's, without it access to the site may be blocked. It is needed to authorize third-party access. 
+
+https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
 
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
+### Routing 
+
 (Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
 (Provide reference urls to your sources of information about the feature - required)
 
-What features are missing?
-- middleware - can do pre processing on incoming requests, Can also do post processing on the response. Middleman between the server & application . 'Bridges gaps' between the server and application to provide a seamless user experience. Modular . Can be in a different lang. virtually all Framewokrs have middleware as a feature as it's modular & reusable. 
- CORS
-CORS? 
+Routing is how an application responds to a request from the client to a particular endpoint using a request method, for example GET or DELETE.  
+In Express routing is done via HTTP methods -  allowing the app to listen for a request and when a match is found the function is called.  
 
+https://expressjs.com/en/guide/routing.html
 
-Middleware is available in a number of frameworks as it is modular and reusable. There are many Middleware options for ExpressJS which help effectively manage tasks like request and response which is needed on the server side. 
+```Javascript
+// function that returns all of the items
+app.get('/items', (req, res) => {
+  res.status(200).json(Object.values(ITEM))
+  console.log(ITEM)
+})
+```
+Routing sets out to create a direct path of communication between the server and client, selecting the best path according to predetermined rules. This keeps communication paths simple and efficient, allowing for less latency for the user. 
 
+### Error Handling 
 
-### (name of Feature 2)
+Express comes with a default error handler built in. The handler catches and processes errors that occur both synchronously and asynchronously. This is another middleware function of Express which can be added to the end of the  function stack. 
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+https://expressjs.com/en/guide/error-handling.html
 
+```javascript
+app.get('/', (req, res) => {
+  throw new Error('BROKEN') // Express will catch this on its own.
+})
+```
 
-### (name of Feature 3)
-
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+Having a built-in default error handling system allows errors to be detected and reported allowing for more efficient debugging. Having this as a built in feature means less lines of code are needed. 
 
 
 Server Language Features
@@ -165,12 +187,14 @@ Within our client a virtual DOM could be considered as this:
         }
 ```
 
-### (name of Feature 2)
+### Data Binding
 
 (Technical description of the feature - 40ish words)
 (A code block snippet example demonstrating the feature)
 (Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
 (Provide reference urls to your sources of information about the feature - required)
+
+A feature that helps assign values to HTML attributes 
 
 
 ### (name of Feature 3)
@@ -205,28 +229,6 @@ Conclusions
 
 (justify why frameworks are recommended - 120ish words)
 (justify which frameworks should be used and why 180ish words)
-
-
-Notes
-======================================
-
-critique of example server
------------------------------
-
-https://github.com/IU14/frameworks_and_languages_module/blob/ac05f3d5a821fabf5a0852f9d04183fb752c349d/example_server/app/server.py#L9-L10  [where they are defined]
-
-https://github.com/IU14/frameworks_and_languages_module/blob/ac05f3d5a821fabf5a0852f9d04183fb752c349d/example_server/app/web_utils.py#L30-L31   - [there is a dot test in python that looks like a comment in the code]
-
- - Link(s) to where the routing is handled. Is this expandable? - 
- - this only allows to route from the URL path, currently global and in one place. Using reg ex will struggle to chain them to others - so not expandable (all in one place)- framework (express) allows us to route on a variety of things.
-
-CORS? 
-
-https://github.com/IU14/frameworks_and_languages_module/blob/ac05f3d5a821fabf5a0852f9d04183fb752c349d/example_server/app/http_server.py#L71-L72 [default response]
-https://github.com/IU14/frameworks_and_languages_module/blob/ac05f3d5a821fabf5a0852f9d04183fb752c349d/example_server/app/web_utils.py#L48-L49 
-
-- they are spread over multiple locations and have insecure defaults. 
-
 
 
 
