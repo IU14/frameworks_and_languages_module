@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!---links this page to the css style sheets of the skeleton framework-->
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/skeleton.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+
     <title>FreeCycle</title>
   </head>
 
@@ -19,35 +24,60 @@
     </script>
       
       <div id="app">
-        <h1>Welcome to FreeCycle</h1>
+        <h1><strong> Welcome to FreeCycle</strong></h1>
       
-        <h2> Set up your item to sell </h2>
-        <form  @submit.prevent="postItem">
-          <input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
-          <input v-model="item.keywords" name ="keywords" placeholder="Enter Item keywords"/>
-          <input v-model="item.description" name ="description" placeholder="Enter item description"/>
-          <input v-model="item.image" name ="image" placeholder="image address (optional)"/>
-          <input V-model="item.lat" name ="lat" placeholder="enter lat"/>
-          <input v-model="item.lon" name ="lon" placeholder="enter lon"/>
-          <button data-action ="create_item">Create Item</button>
-        </form>
+        <!---Sets up the input form to use skeletons 6 column set up-->
+        <div class="row">
+          <div class="six columns">
 
-        <h3>Current items available:</h3>
-        <ul>
-          <li v-for="item in list">
-            <span data-field="user_id">{{item.user_id}}</span>
-            <span data-field ="description">{{item.description}}</span>
-            <span data-field="keywords">{{item.keywords}}</span>
-            <span data-field="image">{{item.image}}</span>
-            <span data-field="lat">{{item.lat}}</span>
-            <span data-field="lon">{{item.lon}}</span>
-            <span data-field="id">{{item.id}}</span>
-            <button data-action="delete" @click="deleteItem(item.id)">Delete</button>
-          </li>
-        </ul>
+            <h4><u>Set up your item to sell </u></h4>
+            <form  @submit.prevent="postItem">
+              <input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
+              <input v-model="item.keywords" name ="keywords" placeholder="Enter Item keywords"/>
+              <input v-model="item.description" name ="description" placeholder="Enter item description"/>
+              <input v-model="item.image" name ="image" placeholder="image address (optional)"/>
+              <input V-model="item.lat" name ="lat" placeholder="enter lat"/>
+              <input v-model="item.lon" name ="lon" placeholder="enter lon"/>
+              <input data-action ="create_item" class="button-primary" type="submit" value="Create Item">
+            
+            </form>
 
+          </div>
+
+          <!--sets up available items in a table, marked as seven columns so starts underneath the previous form-->
+          <div class=" seven columns">
+
+            <h4><u>Current items available:</u></h4>
+             <table class="u-full-width">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Item description</th>
+                  <th>Item Keywords</th>
+                  <th>Image</th>
+                  <th>Lat</th>
+                  <th>Lon</th>
+                  <th>Item ID</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <!--Sets up the table to display the items in the list. Set each item to Menu to remove the bullet point default formatting skeleton has for lists-->
+              <tbody>
+                <tr>
+                  <td><menu v-for="item in list"><span data-field="user_id">{{item.user_id}}</span></menu></td>
+                  <td><menu v-for="item in list"><span data-field ="description">{{item.description}}</span></menu></td>
+                  <td><menu v-for="item in list"><span data-field="keywords">{{item.keywords}}</span></menu></td>
+                  <td><menu v-for="item in list"><span data-field="image">{{item.image}}</span></menu></td>
+                  <td><menu v-for="item in list"><span data-field="lat">{{item.lat}}</span></menu></td>
+                  <td><menu v-for="item in list"><span data-field="lon">{{item.lon}}</span></menu></td>
+                  <td><menu v-for="item in list"><span data-field="id">{{item.id}}</span></menu></td>
+                  <td><menu v-for="item in list"><button class="button-primary" data-action="delete" @click="deleteItem(item.id)">Delete</button> </li></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-
   </body>
 </html>
 
