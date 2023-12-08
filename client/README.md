@@ -19,3 +19,7 @@ In order to delete an item from the list, press the delete button.
 
 To run the client tests, first stop the client running using the command "ctrl + c".  
 Return to the main directory using the command " cd .. " if needed, and then run the command "run test_client" in the terminal to run the client tests. 
+
+### Layout 
+
+Uses Skeleton layout framework to format the page

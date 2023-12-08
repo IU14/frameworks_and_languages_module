@@ -3,9 +3,12 @@
   <!-- set up of skeleton layout framework-->
   <head>
     <meta charset="utf-8">
+    <!--mobile specific set up (scales to mobile)
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!---links this page to the css style sheets of the skeleton framework-->
+    <!---links index.html to the css style sheets of the skeleton framework
+    download framework css sheets here: http://getskeleton.com/#intro-->
     <link href="css/normalize.css" rel="stylesheet">
     <link href="css/skeleton.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
@@ -26,7 +29,8 @@
       <div id="app">
         <h1><strong> Welcome to FreeCycle</strong></h1>
       
-        <!---Sets up the input form to use skeletons 6 column set up-->
+        <!---Sets up the input form to use skeletons 6 column set up
+        http://getskeleton.com/#grid link to grid layout framework-->
         <div class="row">
           <div class="six columns">
 
@@ -38,6 +42,8 @@
               <input v-model="item.image" name ="image" placeholder="image address (optional)"/>
               <input V-model="item.lat" name ="lat" placeholder="enter lat"/>
               <input v-model="item.lon" name ="lon" placeholder="enter lon"/>
+              <!--link to skelton button documentation http://getskeleton.com/#buttons
+              Changed button using layout framework-->
               <input data-action ="create_item" class="button-primary" type="submit" value="Create Item">
             
             </form>
@@ -47,6 +53,7 @@
           <!--sets up available items in a table, marked as seven columns so starts underneath the previous form-->
           <div class=" seven columns">
 
+            <!---Documentation to setting up a table in skelton http://getskeleton.com/#tables-->
             <h4><u>Current items available:</u></h4>
              <table class="u-full-width">
               <thead>
