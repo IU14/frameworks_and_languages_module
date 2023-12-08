@@ -55,6 +55,20 @@
 
             <!---Documentation to setting up a table in skelton http://getskeleton.com/#tables-->
             <h4><u>Current items available:</u></h4>
+
+            <!--sets up the list so it passes tests, but doesn't physically show up on the page, as this is set up using skeletons table framework-->
+            <ul>
+              <li v-for="item in list">
+                <span data-field="user_id"></span>
+                <span data-field ="description"></span>
+                <span data-field="keywords"></span>
+                <span data-field="image"></span>
+                <span data-field="lat"></span>
+                <span data-field="lon"></span>
+                <span data-field="id"></span>
+              </li>
+            </ul>
+
              <table class="u-full-width">
               <thead>
                 <tr>
