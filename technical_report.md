@@ -3,7 +3,7 @@ Technical Report
 
 This report is intended to detail and explain what languages, frameworks and features have been used for the server and client side domains of the FreeCycle website.  
 
-Firstly, the report will detail why the prototype server and client are not appropriate for this project & why and will then discuss what features of the frameworks and languages have been used and why. 
+Firstly, the report will detail why the prototype server and client are not appropriate for this project and why, and will then discuss what features of the frameworks and languages have been used and why. 
 
 
 Critique of Server/Client prototype
@@ -229,6 +229,17 @@ Conclusions
 
 (justify why frameworks are recommended - 120ish words)
 (justify which frameworks should be used and why 180ish words)
+
+There are many benefits to using Frameworks when developing. Frameworks provide an infrastructure so that the developers can focus on features that are unique to the current project without having to be concerned with the basics of the code. Therefore, they have to write less code which saves on development time, money and has less chance for bugs in the code. 
+
+https://codeinstitute.net/blog/what-is-a-framework/#:~:text=Frameworks%20are%20a%20huge%20help,has%20to%20write%20less%20code.
+
+Good Frameworks are simple, consistent and easy to implement with default behaviour built in. Frameworks are recommended as they provide solutions to code how a peice of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. They provide consistency that is easy to understand and be picked up if the code is then given to another team of developers. STOPS 
+
+
+WHY THESE FRAMEWORKS FOR THIS PROJECT
+
+Same language 
 
 
 
