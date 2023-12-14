@@ -27,13 +27,22 @@
     </script>
       
       <div id="app">
+        <!---Basic Skeleton navbar
+        &nbsp; allows there to be a space after the text -->
+        <div class="navBar" id="mainNavBar">
+          <div class="eleven columns">
+            <a href="#home">Home &nbsp; </a>
+            <a href="#Items">Items &nbsp;</a>
+            <a href="javascript:void(0);" class="icon" onClick="openDrawerMenu()">&#9776;</a>
+          </div>
+        </div>
+
         <h1><strong> Welcome to FreeCycle</strong></h1>
       
         <!---Sets up the input form to use skeletons 6 column set up
         http://getskeleton.com/#grid link to grid layout framework-->
         <div class="row">
           <div class="six columns">
-
             <h4><u>Set up your item to sell </u></h4>
             <form  @submit.prevent="postItem">
               <input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
@@ -44,58 +53,29 @@
               <input v-model="item.lon" name ="lon" placeholder="enter lon"/>
               <!--link to skelton button documentation http://getskeleton.com/#buttons
               Changed button using layout framework-->
-              <input data-action ="create_item" class="button-primary" type="submit" value="Create Item">
-            
+              <input data-action ="create_item" class="button-primary" type="submit" value="Create Item">  
             </form>
-
           </div>
 
-          <!--sets up available items in a table, marked as seven columns so starts underneath the previous form-->
+          <!--sets up available items in a list, marked as seven columns so starts underneath the previous form-->
           <div class=" seven columns">
 
-            <!---Documentation to setting up a table in skelton http://getskeleton.com/#tables-->
             <h4><u>Current items available:</u></h4>
-
-            <!--sets up the list so it passes tests, but doesn't physically show up on the page, as this is set up using skeletons table framework-->
+            <!---Header for the items so User is aware of what each item is --->
+            <h6>User     Description     Keywords     Image      Lat     Lon     Item Id   </h6>
+            <!---sets up the list and gives each item space-->
             <ul>
               <li v-for="item in list">
-                <span data-field="user_id"></span>
-                <span data-field ="description"></span>
-                <span data-field="keywords"></span>
-                <span data-field="image"></span>
-                <span data-field="lat"></span>
-                <span data-field="lon"></span>
-                <span data-field="id"></span>
+                <span data-field="user_id">{{item.user_id}} &nbsp; </span>
+                <span data-field ="description">{{item.description}} &nbsp;</span>
+                <span data-field="keywords">{{item.keywords}} &nbsp;</span>
+                <span data-field="image">{{item.image}} &nbsp;</span>
+                <span data-field="lat">{{item.lat}} &nbsp;</span>
+                <span data-field="lon">{{item.lon}} &nbsp;</span>
+                <span data-field="id">{{item.id}} &nbsp;</span>
+                <button class="button-primary" data-action="delete" @click="deleteItem(item.id)">Delete</button>
               </li>
             </ul>
-
-             <table class="u-full-width">
-              <thead>
-                <tr>
-                  <th>User ID</th>
-                  <th>Item description</th>
-                  <th>Item Keywords</th>
-                  <th>Image</th>
-                  <th>Lat</th>
-                  <th>Lon</th>
-                  <th>Item ID</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <!--Sets up the table to display the items in the list. Set each item to Menu to remove the bullet point default formatting skeleton has for lists-->
-              <tbody>
-                <tr>
-                  <td><menu v-for="item in list"><span data-field="user_id">{{item.user_id}}</span></menu></td>
-                  <td><menu v-for="item in list"><span data-field ="description">{{item.description}}</span></menu></td>
-                  <td><menu v-for="item in list"><span data-field="keywords">{{item.keywords}}</span></menu></td>
-                  <td><menu v-for="item in list"><span data-field="image">{{item.image}}</span></menu></td>
-                  <td><menu v-for="item in list"><span data-field="lat">{{item.lat}}</span></menu></td>
-                  <td><menu v-for="item in list"><span data-field="lon">{{item.lon}}</span></menu></td>
-                  <td><menu v-for="item in list"><span data-field="id">{{item.id}}</span></menu></td>
-                  <td><menu v-for="item in list"><button class="button-primary" data-action="delete" @click="deleteItem(item.id)">Delete</button> </li></td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
