@@ -11,9 +11,9 @@ Critique of Server/Client prototype
 
 ### Overview
 
-Frameworks were developed as a time saving method for developers,they offer consistency within the codebase itself as well as security and scalability. https://www.linkedin.com/pulse/exploring-advantages-disadvantages-incorporating-frameworks-juste/  
+Frameworks were developed as a time saving method for developers, they offer consistency within the codebase itself as well as security and scalability. https://www.linkedin.com/pulse/exploring-advantages-disadvantages-incorporating-frameworks-juste/  
 
-However, if the project is small enough, the developers may be able to get away without using a framework at all. But, this can create issues down the line if the project is passed to a different development team as the codebase may not be consistent which creates more work and takes time to learn, and therefore it is harder to maintain.   
+However, if the project is small enough, the developers may be able to get away without using a framework at all. But, this can create issues down the line if the project is passed to a different development team as the codebase may not be consistent; which creates more work and takes time to learn, and therefore it is harder to maintain.   
 
 The prototypes for this project were created without using a framework. 
 
@@ -46,7 +46,6 @@ If a packet is larger than 64k, this function will not work. This code can also 
 
 Python applications have built-in functions that handles HTTP requests, so this is unnecessary.
 
-
 ### Routing
 
 ```python
@@ -60,7 +59,7 @@ ROUTES = (
     ('GET', r'/items$', get_items),
 )
 ```
-This routing code only allows to route from the URL path, which is currently global and in one place. Using regular expressions will struggle to chain them to others making this not expandable. Frameworks allow us to route on a variety of things.
+This routing code only allows to route from the URL path, which is currently global and in one place. Using regular expressions will struggle to chain them to others making this non-expandable. Frameworks allow developers to route on a variety of things.
 
 ### Recommendation
 
@@ -172,10 +171,9 @@ const vnode = {
 ```
 https://vuejs.org/guide/extras/rendering-mechanism.html
 
-Within our client a virtual DOM could be considered as this:
+Within this client a virtual DOM could be considered as this:
 
 ```Javascript
-
      item: {
             user_id: "", 
             keywords: [""], 
@@ -187,23 +185,41 @@ Within our client a virtual DOM could be considered as this:
         }
 ```
 
-### Data Binding
+### Two-Way data binding (V-model directive)
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+Vue has an inbuilt directive called V-Model. This model allows developers to bind a value of a input element to a data property. Any changes made to the input will be immediately update the data - and this works in reverse too. 
 
-A feature that helps assign values to HTML attributes 
+https://www.w3schools.com/vue/ref_v-model.php
 
+```Javascript
+input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
+```
 
-### (name of Feature 3)
+By using *v-model = "name"* any changes made will update the name property and vice versa.
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+The data binding features in Vue simplifies the process of keeping the UI in sync with the underlying data by automating the process, as well as providing a way of developing dynamic and responsive applications, whilst also maintaining the code readability for the developer. 
 
+### List Rendering (V-For Directive)
+
+Vue uses a specific directive 'v-For' to render lists based on arrays. This directive uses a special syntax (item in items) where *items* is the source of the data for the array and *item* is an Alias for the list being iterated on. 
+
+https://v1.vuejs.org/guide/list.html#v-for
+
+```Javascript
+<ul>
+    <li v-for="item in list">
+        <span data-field="user_id">{{item.user_id}} &nbsp; </span>
+        <span data-field ="description">{{item.description}} &nbsp;</span>
+        <span data-field="keywords">{{item.keywords}} &nbsp;</span>
+        <span data-field="image">{{item.image}} &nbsp;</span>
+        <span data-field="lat">{{item.lat}} &nbsp;</span>
+        <span data-field="lon">{{item.lon}} &nbsp;</span>
+        <span data-field="id">{{item.id}} </span>
+        <button class="button-primary" data-action="delete" @click="deleteItem(item.id)">Delete</button>
+   </li>
+```
+
+V-for is a convenient way to dynamically generate elements generates the ability to iterate over each item and render it multiple times which reduces the need for manual DOM manipulation. It simplifies the process of rendering/updating lists in Vue applications. This improves development efficiency 
 
 Client Language Features
 ------------------------
@@ -230,17 +246,13 @@ Conclusions
 (justify why frameworks are recommended - 120ish words)
 (justify which frameworks should be used and why 180ish words)
 
-There are many benefits to using Frameworks when developing. Frameworks provide an infrastructure so that the developers can focus on features that are unique to the current project without having to be concerned with the basics of the code. Therefore, they have to write less code which saves on development time, money and has less chance for bugs in the code. 
+There are many benefits to using Frameworks when developing. Frameworks provide an infrastructure so that the developers can focus on features that are unique to that project without having to be concerned with the basics of the code. Therefore, they have to write less code which saves on development time, money and has less chance for bugs in the code. 
 
 https://codeinstitute.net/blog/what-is-a-framework/#:~:text=Frameworks%20are%20a%20huge%20help,has%20to%20write%20less%20code.
 
-Good Frameworks are simple, consistent and easy to implement with default behaviour built in. Frameworks are recommended as they provide solutions to code how a peice of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. They provide consistency that is easy to understand and be picked up if the code is then given to another team of developers. STOPS 
+Good Frameworks are simple, consistent and easy to implement with default behavior -  like the directive models in vue -  built in. Frameworks are recommended as they provide solutions to how a piece of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. They provide consistency that is easy to understand and be picked up if the code is then given to another team of developers. STOPS 
 
 
 WHY THESE FRAMEWORKS FOR THIS PROJECT
 
 Same language 
-
-
-
-recording from 20/11/2023 @11:50ish  covering the markdown.md 
