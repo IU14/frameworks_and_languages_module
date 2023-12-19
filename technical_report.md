@@ -128,29 +128,46 @@ Having a built-in default error handling system allows errors to be detected and
 Server Language Features
 -----------------------
 
-### (name of Feature 1)
+### Dynamic Typing
+
+Javascript's dynamic typing allows variables to be declared without a variable type(String, int etc). At runtime the program will assign a non type declared variable a type according to the value of it at the time. 
+
+https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing
+
+```Javascript
+ITEM = {}
+```
+
+Not needing to explicitly state a variable type offers an ease of use to developers, who in turn can then write more concise code. Dynamic typing also allows a different value to be assigned to a variable and can change it to a different type. 
+
+
+### Const
 
 (Technical description of the feature - 40ish words)
 (A code block snippet example demonstrating the feature)
 (Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
 (Provide reference urls to your sources of information about the feature - required)
 
+Const is a keyword used to Javascript to not allow the reassignment of a variable. It should be used when the value of a variable will not change to help prevent reassignment by the program. 
 
-### (name of Feature 2)
+```Javascript
+const app = express()
+const port = 8000
+```
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+Using the keyword Const makes code more predictable and less likely to succumb to bugs. Const also saves the program some time when it compiles as its doesn't have to figure out whether the value is to be changed. 
 
 
+https://www.shecodes.io/athena/124459-why-are-we-using-let-and-not-const#:~:text=It's%20generally%20recommended%20to%20use,to%20be%20updated%20or%20changed.
+
+https://stackoverflow.com/questions/21237105/const-in-javascript-when-to-use-it-and-is-it-necessary
 
 Client Framework Features
 -------------------------
 
 ### Virtual DOM (Document object model)
 
-VUeJs uses a virtual DOM which creates a replica of the DOM when changes are made.  These changes are made to the JS data structures, which is then compared to the original. With only the final changes get submitted to the real DOM. This means changes can be made at a faster rate and allows for good optimisation.
+VUeJs uses a virtual DOM which creates a replica of the DOM when changes are made.  These changes are made to the JS data structures, which is then compared to the original. With only the final changes get submitted to the real DOM. This means changes can be made at a faster rate and allows for good optimization.
 
 https://www.tutorialspoint.com/vuejs/vuejs_overview.htm 
 
@@ -246,13 +263,15 @@ Conclusions
 (justify why frameworks are recommended - 120ish words)
 (justify which frameworks should be used and why 180ish words)
 
-There are many benefits to using Frameworks when developing. Frameworks provide an infrastructure so that the developers can focus on features that are unique to that project without having to be concerned with the basics of the code. Therefore, they have to write less code which saves on development time, money and has less chance for bugs in the code. 
+There are many benefits to using Frameworks when developing. Firstly, frameworks provide an infrastructure, meaning developers can focus on features that are unique to that project without having to be concerned with the basics of the code. Therefore, they have to write less code which saves on development time, money and has less chance for bugs to be crated within the code. 
+
+Frameworks provide a consistency that is easy to understand, and can be picked up if the code is then given to another team of developers. They are also highly recomended as they offer solutions on how a piece of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. 
 
 https://codeinstitute.net/blog/what-is-a-framework/#:~:text=Frameworks%20are%20a%20huge%20help,has%20to%20write%20less%20code.
 
-Good Frameworks are simple, consistent and easy to implement with default behavior -  like the directive models in vue -  built in. Frameworks are recommended as they provide solutions to how a piece of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. They provide consistency that is easy to understand and be picked up if the code is then given to another team of developers. STOPS 
-
+Good Frameworks are simple, consistent and easy to implement with default behavior -  like the directive models in vue -  built in. 
 
 WHY THESE FRAMEWORKS FOR THIS PROJECT
-
-Same language 
+Javascript is a dynamic language making it ideal for client and server development as ..... . Javascript is a extremely popular language to use for this form of development ...., and all web browsers can understand it. 
+Both the frameworks chosen for the client & server of this project are JS based frameworks .... which mean .... 
+These frameworks are lightweight, allowing for fast compile time and wit the use of inbuilt directives and keywords leads to fast & simple development. Express Js follows the above stated guidelines for a good framework. 
