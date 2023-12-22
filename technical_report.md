@@ -1,19 +1,20 @@
 Technical Report
 ================
 
-This report is intended to detail and explain what languages, frameworks and features have been used for the server and client side domains of the FreeCycle website.  
+This report is intended to detail and explain what languages, frameworks and features have been used for the server and client-side domains of the FreeCycle website. 
 
-Firstly, the report will detail why the prototype server and client are not appropriate for this project and why, and will then discuss what features of the frameworks and languages have been used and why. 
-
+Firstly, the report will detail why the prototype server and client are not appropriate for this project and why, followed by a discussion of what different features of the chosen frameworks and languages there are
 
 Critique of Server/Client prototype
 ---------------------
 
 ### Overview
 
-Frameworks were developed as a time saving method for developers, they offer consistency within the codebase itself as well as security and scalability. https://www.linkedin.com/pulse/exploring-advantages-disadvantages-incorporating-frameworks-juste/  
+Frameworks were developed as a time saving method for developers, they offer consistency within the codebase itself as well as security and scalability. 
+ 
+https://www.linkedin.com/pulse/exploring-advantages-disadvantages-incorporating-frameworks-juste/  
 
-However, if the project is small enough, the developers may be able to get away without using a framework at all. But, this can create issues down the line if the project is passed to a different development team as the codebase may not be consistent; which creates more work and takes time to learn, and therefore it is harder to maintain.   
+However, if the project is small enough, developers may be able to get away without using a framework. But this can create issues down the line if the project is passed to a different development team as the codebase may not be consistent; which creates more work and takes time to learn, and therefore it is harder to maintain. 
 
 The prototypes for this project were created without using a framework. 
 
@@ -33,7 +34,7 @@ def serve_app(func_app, port, host=''):
             with conn:
                 #log.debug(f'Connected by ')
                 #while True:
-                    data = conn.recv(65535)  # If the request does not come though in a single recv/packet then this server will fail and will not composit multiple TCP packets. Sometimes the head and the body are sent in sequential packets. This happens when the system switches task under load.
+                    data = conn.recv(65535)  # If the request does not come through in a single recv/packet then this server will fail and will not composit multiple TCP packets. Sometimes the head and the body are sent in sequential packets. This happens when the system switches task under load.
                     #if not data: break
                     try:
                         request = parse_request(data)
@@ -42,9 +43,9 @@ def serve_app(func_app, port, host=''):
                         continue
 
 ```
-If a packet is larger than 64k, this function will not work. This code can also only handle one instruction at a time, as no asynchronous functions have been set up and will likely cause a crash. 
+If a packet is larger than 64k, this function will not work. This code can only manage one instruction at a time, as no asynchronous functions have been set up and will likely cause a crash. 
 
-Python applications have built-in functions that handles HTTP requests, so this is unnecessary.
+Python applications have built-in functions that handles HTTP requests, so this whole code snippet is unnecessary.
 
 ### Routing
 
@@ -67,48 +68,47 @@ The prototypes implementation offers no structure to the code base. As well as n
 
 Using a framework that has inbuilt functions allows for structure and uniformity, making the code base far more readable and understandable. It allows for concise code which is important for maintenance and stability. 
 
-The Express JS Framework has been chosen for the sever, VueJs has been selected for the client and Skeleton has been used for the layout Framework.
+The ExpressJS Framework has been chosen for the sever, VueJs has been selected for the client and Skeleton has been used for the layout Framework.
 
 Server Framework Features
 -------------------------
 
 ### CORS / Middleware 
 
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
+Most frameworks offer some form of middleware as it is modular and reusable. CORS is a middleware used by Express that allows for cross origin resource sharing.
 
-Most frameworks offer some form of middleware as it is modular and reusable. CORS is a middleware used by Express that allows for cross origin resource sharing allowing restricted resources to be accessed from another domain. 
 https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
 
-```javascript
+```JavaScript
 const cors = require('cors')
 
 app.use(cors())
 ```
-Once installed only two lines of code is required for CORS to run in Express. 
+Once installed, only two lines of code is required for CORS to run in Express, which can be seen in the provided snippet. 
 
-CORS is a browser friendly security feature that allows access to the API's, without it access to the site may be blocked. It is needed to authorize third-party access. 
+CORS is a browser friendly security feature that allows access to the APIs, without it, access to the site may be blocked as some default browser behaviours follow a same origin policy - meaning requests to different domains will fail. CORS allows for cross domain requests to occur. 
 
 https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
 
+https://stackoverflow.com/questions/27365303/what-is-the-issue-cors-is-trying-to-solve
 
 ### Routing 
 
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
-
-Routing is how an application responds to a request from the client to a particular endpoint using a request method, for example GET or DELETE.  
-In Express routing is done via HTTP methods -  allowing the app to listen for a request and when a match is found the function is called.  
+Routing is how an application responds to a request from the client to a particular endpoint using a request method, for example GET or DELETE. 
+In Express routing is done via HTTP methods -  allowing the app to listen for a request and when a match is found the function is called. 
 
 https://expressjs.com/en/guide/routing.html
 
-```Javascript
-// function that returns all of the items
+```JavaScript
+// function that returns all the items
 app.get('/items', (req, res) => {
   res.status(200).json(Object.values(ITEM))
   console.log(ITEM)
 })
 ```
-Routing sets out to create a direct path of communication between the server and client, selecting the best path according to predetermined rules. This keeps communication paths simple and efficient, allowing for less latency for the user. 
+Routing sets out to create a direct path of communication between the server and client, selecting the best path according to predetermined rules. This keeps communication paths simple and efficient, allowing for less latency for the user. Network communication failures happen when sites take a long time to load, routing helps limit these failures. 
+
+https://aws.amazon.com/what-is/routing/#:~:text=A%20computer%20network%20is%20made,path%20using%20some%20predetermined%20rules.
 
 ### Error Handling 
 
@@ -116,47 +116,39 @@ Express comes with a default error handler built in. The handler catches and pro
 
 https://expressjs.com/en/guide/error-handling.html
 
-```javascript
+```JavaScript
 app.get('/', (req, res) => {
   throw new Error('BROKEN') // Express will catch this on its own.
 })
 ```
 
-Having a built-in default error handling system allows errors to be detected and reported allowing for more efficient debugging. Having this as a built in feature means less lines of code are needed. 
-
+Having a built-in default error handling system allows errors to be detected and reported allowing for more efficient debugging. Having this as a built-in feature means less lines of code are needed. 
 
 Server Language Features
 -----------------------
 
 ### Dynamic Typing
 
-Javascript's dynamic typing allows variables to be declared without a variable type(String, int etc). At runtime the program will assign a non type declared variable a type according to the value of it at the time. 
+JavaScript’s dynamic typing allows variables to be declared without a variable type(String, int etc). At runtime, the program will assign a non-type declared variable a type according to the value of it at the time. 
 
 https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing
 
-```Javascript
+```JavaScript
 ITEM = {}
 ```
 
 Not needing to explicitly state a variable type offers an ease of use to developers, who in turn can then write more concise code. Dynamic typing also allows a different value to be assigned to a variable and can change it to a different type. 
 
-
 ### Const
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+Const is a keyword used in JavaScript to not allow the reassignment of a variable. It should be used when the value of a variable will not change to help prevent reassignment by the program. 
 
-Const is a keyword used to Javascript to not allow the reassignment of a variable. It should be used when the value of a variable will not change to help prevent reassignment by the program. 
-
-```Javascript
+```JavaScript
 const app = express()
 const port = 8000
 ```
 
-Using the keyword Const makes code more predictable and less likely to succumb to bugs. Const also saves the program some time when it compiles as its doesn't have to figure out whether the value is to be changed. 
-
+Using the keyword Const makes code more predictable and less likely to succumb to bugs. Const also saves the program some time when it compiles as it does not have to figure out whether the value is to be changed. 
 
 https://www.shecodes.io/athena/124459-why-are-we-using-let-and-not-const#:~:text=It's%20generally%20recommended%20to%20use,to%20be%20updated%20or%20changed.
 
@@ -167,15 +159,15 @@ Client Framework Features
 
 ### Virtual DOM (Document object model)
 
-VUeJs uses a virtual DOM which creates a replica of the DOM when changes are made.  These changes are made to the JS data structures, which is then compared to the original. With only the final changes get submitted to the real DOM. This means changes can be made at a faster rate and allows for good optimization.
+VueJs uses a virtual DOM which creates a replica of the DOM when changes are made. These changes are made to the JavaScript data structures, which is then compared to the original. With only the final changes getting sent to the real DOM. This means changes can be made at a faster rate and allows for good optimization.
 
 https://www.tutorialspoint.com/vuejs/vuejs_overview.htm 
 
 The concept of a virtual DOM is to help with standard performance issues in a browser  as it only applies necessary changes and leaves the rest the same. This means faster updates to the user and therefore better user experience. 
 
-In VueJS a virtual DOM is based on a pattern that can look like this:
+In VueJs a virtual DOM is based on a pattern that can look like this:
 
-```Javascript
+```JavaScript
 const vnode = {
   type: 'div',
   props: {
@@ -190,7 +182,7 @@ https://vuejs.org/guide/extras/rendering-mechanism.html
 
 Within this client a virtual DOM could be considered as this:
 
-```Javascript
+```JavaScript
      item: {
             user_id: "", 
             keywords: [""], 
@@ -204,11 +196,11 @@ Within this client a virtual DOM could be considered as this:
 
 ### Two-Way data binding (V-model directive)
 
-Vue has an inbuilt directive called V-Model. This model allows developers to bind a value of a input element to a data property. Any changes made to the input will be immediately update the data - and this works in reverse too. 
+Vue has an inbuilt directive called V-Model. This model allows developers to bind a value of an input element to a data property. Any changes made to the input will be immediately update the data - and this works in reverse too. 
 
 https://www.w3schools.com/vue/ref_v-model.php
 
-```Javascript
+```JavaScript
 input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
 ```
 
@@ -222,7 +214,7 @@ Vue uses a specific directive 'v-For' to render lists based on arrays. This dire
 
 https://v1.vuejs.org/guide/list.html#v-for
 
-```Javascript
+```JavaScript
 <ul>
     <li v-for="item in list">
         <span data-field="user_id">{{item.user_id}} &nbsp; </span>
@@ -236,42 +228,66 @@ https://v1.vuejs.org/guide/list.html#v-for
    </li>
 ```
 
-V-for is a convenient way to dynamically generate elements generates the ability to iterate over each item and render it multiple times which reduces the need for manual DOM manipulation. It simplifies the process of rendering/updating lists in Vue applications. This improves development efficiency 
+V-for is a convenient way to dynamically generate elements, and has the ability to iterate over each item and render it multiple times which reduces the need for manual DOM manipulation. It simplifies the process of rendering/updating lists in Vue applications. This improves development efficiency 
 
 Client Language Features
 ------------------------
 
-### (name of Feature 1)
+### Automatic Semicolons
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+There are some Javascript statements that require a semicolon (;) in the syntax. To streamline coding in JavaScript it automatically inserts semicolons. There are three incidents when this occurs:  
+1) When a token not allowed is encountered  
+2)  When the end of the input stream is reached  
+3) When there are forbidden line terminators  
 
-### (name of Feature 2)
+For example:
 
-(Technical description of the feature - 40ish words)
-(A code block snippet example demonstrating the feature)
-(Explain the problem-this-is-solving/why/benefits/problems - 40ish words)
-(Provide reference urls to your sources of information about the feature - required)
+```Javascript
+a = b
+++c
 
+// is transformed by Automatic semicolon into
 
+a = b;
+++c;
+```
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#automatic_semicolon_insertion
+
+This feature aids development by making it more streamlined and stops syntax error bugs from appearing  in the code. Meaning again the developers can focus more on the features they are trying to implement. 
+
+### addEventListener 
+
+An addEventListener creates a function that will be called whenever a specific event happens. The function only takes up a line or two of code and does not have to be repeated for every event of that type that happens in the page. In the code snippet seen below, this creates an event for any button that has been implemented on the page. 
+
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#using_addeventlistener_instead
+
+https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+
+```Javascript
+const buttons = document.querySelectorAll("button");
+
+for (const button of buttons) {
+  button.addEventListener("click", createParagraph);
+}
+```
+
+This feature stops a developer from polluting their html sections with lines of Javascript. Again, this allows for a more streamlined development period and creates clearer code that can be understood. 
 
 Conclusions
 -----------
 
-(justify why frameworks are recommended - 120ish words)
-(justify which frameworks should be used and why 180ish words)
+There are many benefits to using Frameworks when developing. Firstly, frameworks provide an infrastructure, meaning developers can focus on features that are unique to that project without having to be concerned with the basics of the code. Meaning less code is required which saves on development time, money and has less chance for bugs to occur.
 
-There are many benefits to using Frameworks when developing. Firstly, frameworks provide an infrastructure, meaning developers can focus on features that are unique to that project without having to be concerned with the basics of the code. Therefore, they have to write less code which saves on development time, money and has less chance for bugs to be crated within the code. 
-
-Frameworks provide a consistency that is easy to understand, and can be picked up if the code is then given to another team of developers. They are also highly recomended as they offer solutions on how a piece of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. 
+Frameworks provide a consistency that is easy to understand and can be picked up if the project is then given to another team of developers to update and/or maintain. They are also highly recommended as they offer solutions on how a piece of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. 
 
 https://codeinstitute.net/blog/what-is-a-framework/#:~:text=Frameworks%20are%20a%20huge%20help,has%20to%20write%20less%20code.
 
-Good Frameworks are simple, consistent and easy to implement with default behavior -  like the directive models in vue -  built in. 
+Good Frameworks are simple, consistent, and easy to implement with default behaviour -  like the directive models in Vue -  built in. 
 
-WHY THESE FRAMEWORKS FOR THIS PROJECT
-Javascript is a dynamic language making it ideal for client and server development as ..... . Javascript is a extremely popular language to use for this form of development ...., and all web browsers can understand it. 
-Both the frameworks chosen for the client & server of this project are JS based frameworks .... which mean .... 
-These frameworks are lightweight, allowing for fast compile time and wit the use of inbuilt directives and keywords leads to fast & simple development. Express Js follows the above stated guidelines for a good framework. 
+JavaScript is a dynamic language making it ideal for client and server development as web pages tend to be interactive, having a language that can update the page in real time is needed. 
+JavaScript is an extremely popular language to use for this form of development because it has a variety of inbuilt functions and features that are easy to interpret as well as making use of a whole library of middleware components. Another reason JavaScript is popular is that it is compatible with all web browsers. 
+Both the frameworks chosen for the client & server of this project are JavaScript based frameworks. These frameworks are lightweight, allowing for fast compile time and with the use of inbuilt directives and keywords leads to fast & simple development. ExpressJS follows the above stated guidelines for a good framework. 
+
+The chosen layout framework, Skeleton was also chosen for being lightweight and quick to compile. The inbuilt style choices are clean and modern allowing for a clean looking webpage. 
+
+
