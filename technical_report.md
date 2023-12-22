@@ -75,9 +75,7 @@ Server Framework Features
 
 ### CORS / Middleware 
 
-Most frameworks offer some form of middleware as it is modular and reusable. CORS is a middleware used by Express that allows for cross origin resource sharing.
-
-https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+Most frameworks offer some form of middleware as it is modular and reusable. CORS is a middleware used by Express that allows for cross origin resource sharing.(Cross-origin resource sharing.no dateD )
 
 ```JavaScript
 const cors = require('cors')
@@ -86,18 +84,12 @@ app.use(cors())
 ```
 Once installed, only two lines of code is required for CORS to run in Express, which can be seen in the provided snippet. 
 
-CORS is a browser friendly security feature that allows access to the APIs, without it, access to the site may be blocked as some default browser behaviours follow a same origin policy - meaning requests to different domains will fail. CORS allows for cross domain requests to occur. 
-
-https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
-
-https://stackoverflow.com/questions/27365303/what-is-the-issue-cors-is-trying-to-solve
+CORS is a browser friendly security feature that allows access to the APIs, without it, access to the site may be blocked as some default browser behaviours follow a same origin policy - meaning requests to different domains will fail. CORS allows for cross domain requests to occur. (Amazon, no date) (Haney, 2018)
 
 ### Routing 
 
 Routing is how an application responds to a request from the client to a particular endpoint using a request method, for example GET or DELETE. 
-In Express routing is done via HTTP methods -  allowing the app to listen for a request and when a match is found the function is called. 
-
-https://expressjs.com/en/guide/routing.html
+In Express routing is done via HTTP methods -  allowing the app to listen for a request and when a match is found the function is called. (Express, 2017)
 
 ```JavaScript
 // function that returns all the items
@@ -106,15 +98,11 @@ app.get('/items', (req, res) => {
   console.log(ITEM)
 })
 ```
-Routing sets out to create a direct path of communication between the server and client, selecting the best path according to predetermined rules. This keeps communication paths simple and efficient, allowing for less latency for the user. Network communication failures happen when sites take a long time to load, routing helps limit these failures. 
-
-https://aws.amazon.com/what-is/routing/#:~:text=A%20computer%20network%20is%20made,path%20using%20some%20predetermined%20rules.
+Routing sets out to create a direct path of communication between the server and client, selecting the best path according to predetermined rules. This keeps communication paths simple and efficient, allowing for less latency for the user. Network communication failures happen when sites take a long time to load, routing helps limit these failures. (Amazon, no date)
 
 ### Error Handling 
 
-Express comes with a default error handler built in. The handler catches and processes errors that occur both synchronously and asynchronously. This is another middleware function of Express which can be added to the end of the  function stack. 
-
-https://expressjs.com/en/guide/error-handling.html
+Express comes with a default error handler built in. The handler catches and processes errors that occur both synchronously and asynchronously. This is another middleware function of Express which can be added to the end of the  function stack. (ExpressJS, 2017)
 
 ```JavaScript
 app.get('/', (req, res) => {
@@ -129,9 +117,7 @@ Server Language Features
 
 ### Dynamic Typing
 
-JavaScript’s dynamic typing allows variables to be declared without a variable type(String, int etc). At runtime, the program will assign a non-type declared variable a type according to the value of it at the time. 
-
-https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing
+JavaScript’s dynamic typing allows variables to be declared without a variable type(String, int etc). At runtime, the program will assign a non-type declared variable a type according to the value of it at the time. (Mdn Web Docs, no date)
 
 ```JavaScript
 ITEM = {}
@@ -148,20 +134,14 @@ const app = express()
 const port = 8000
 ```
 
-Using the keyword Const makes code more predictable and less likely to succumb to bugs. Const also saves the program some time when it compiles as it does not have to figure out whether the value is to be changed. 
-
-https://www.shecodes.io/athena/124459-why-are-we-using-let-and-not-const#:~:text=It's%20generally%20recommended%20to%20use,to%20be%20updated%20or%20changed.
-
-https://stackoverflow.com/questions/21237105/const-in-javascript-when-to-use-it-and-is-it-necessary
+Using the keyword Const makes code more predictable and less likely to succumb to bugs. Const also saves the program some time when it compiles as it does not have to figure out whether the value is to be changed. (Athena AI, 2023) (Mortensen, 2021)
 
 Client Framework Features
 -------------------------
 
 ### Virtual DOM (Document object model)
 
-VueJs uses a virtual DOM which creates a replica of the DOM when changes are made. These changes are made to the JavaScript data structures, which is then compared to the original. With only the final changes getting sent to the real DOM. This means changes can be made at a faster rate and allows for good optimization.
-
-https://www.tutorialspoint.com/vuejs/vuejs_overview.htm 
+VueJs uses a virtual DOM which creates a replica of the DOM when changes are made. These changes are made to the JavaScript data structures, which is then compared to the original. With only the final changes getting sent to the real DOM. This means changes can be made at a faster rate and allows for good optimization.(Tutorials Point, no date )
 
 The concept of a virtual DOM is to help with standard performance issues in a browser  as it only applies necessary changes and leaves the rest the same. This means faster updates to the user and therefore better user experience. 
 
@@ -178,7 +158,7 @@ const vnode = {
   ]
 }
 ```
-https://vuejs.org/guide/extras/rendering-mechanism.html
+(Vue Js, no date)
 
 Within this client a virtual DOM could be considered as this:
 
@@ -196,9 +176,7 @@ Within this client a virtual DOM could be considered as this:
 
 ### Two-Way data binding (V-model directive)
 
-Vue has an inbuilt directive called V-Model. This model allows developers to bind a value of an input element to a data property. Any changes made to the input will be immediately update the data - and this works in reverse too. 
-
-https://www.w3schools.com/vue/ref_v-model.php
+Vue has an inbuilt directive called V-Model. This model allows developers to bind a value of an input element to a data property. Any changes made to the input will be immediately update the data - and this works in reverse too. (W3Schools, no date)
 
 ```JavaScript
 input v-model="item.user_id"  name ="user_id" placeholder="Enter your User Id"/>
@@ -210,9 +188,7 @@ The data binding features in Vue simplifies the process of keeping the UI in syn
 
 ### List Rendering (V-For Directive)
 
-Vue uses a specific directive 'v-For' to render lists based on arrays. This directive uses a special syntax (item in items) where *items* is the source of the data for the array and *item* is an Alias for the list being iterated on. 
-
-https://v1.vuejs.org/guide/list.html#v-for
+Vue uses a specific directive 'v-For' to render lists based on arrays. This directive uses a special syntax (item in items) where *items* is the source of the data for the array and *item* is an Alias for the list being iterated on. (Vue Js, no date)
 
 ```JavaScript
 <ul>
@@ -251,17 +227,13 @@ a = b
 a = b;
 ++c;
 ```
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#automatic_semicolon_insertion
+(MDN Web Docs, No date)
 
 This feature aids development by making it more streamlined and stops syntax error bugs from appearing  in the code. Meaning again the developers can focus more on the features they are trying to implement. 
 
 ### addEventListener 
 
-An addEventListener creates a function that will be called whenever a specific event happens. The function only takes up a line or two of code and does not have to be repeated for every event of that type that happens in the page. In the code snippet seen below, this creates an event for any button that has been implemented on the page. 
-
-https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#using_addeventlistener_instead
-
-https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+An addEventListener creates a function that will be called whenever a specific event happens. The function only takes up a line or two of code and does not have to be repeated for every event of that type that happens in the page. In the code snippet seen below, this creates an event for any button that has been implemented on the page. (MDN Web Docs, no date)
 
 ```Javascript
 const buttons = document.querySelectorAll("button");
@@ -278,9 +250,7 @@ Conclusions
 
 There are many benefits to using Frameworks when developing. Firstly, frameworks provide an infrastructure, meaning developers can focus on features that are unique to that project without having to be concerned with the basics of the code. Meaning less code is required which saves on development time, money and has less chance for bugs to occur.
 
-Frameworks provide a consistency that is easy to understand and can be picked up if the project is then given to another team of developers to update and/or maintain. They are also highly recommended as they offer solutions on how a piece of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. 
-
-https://codeinstitute.net/blog/what-is-a-framework/#:~:text=Frameworks%20are%20a%20huge%20help,has%20to%20write%20less%20code.
+Frameworks provide a consistency that is easy to understand and can be picked up if the project is then given to another team of developers to update and/or maintain. They are also highly recommended as they offer solutions on how a piece of code is laid out and which type case is followed, meaning these discussions do not need to take place within the development team. (O'Grady, 2023)
 
 Good Frameworks are simple, consistent, and easy to implement with default behaviour -  like the directive models in Vue -  built in. 
 
@@ -290,4 +260,39 @@ Both the frameworks chosen for the client & server of this project are JavaScrip
 
 The chosen layout framework, Skeleton was also chosen for being lightweight and quick to compile. The inbuilt style choices are clean and modern allowing for a clean looking webpage. 
 
+References
+--------------
 
+Cross-origin resource sharing. Available at: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing (Accessed: 22/12/2023).
+
+Amazon (no date) What is routing? Available at: https://aws.amazon.com/what-is/routing/#:~:text=A%20computer%20network%20is%20made,path%20using%20some%20predetermined%20rules (Accessed: Dec 22,2023).
+
+Amazon Configuring CORS for an HTTP API. Amazon. Available at: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html (Accessed: .
+
+Athena, A.I. (2023) [JavaScript] - Why are we using let and not const? Available at: https://www.shecodes.io/athena/124459-why-are-we-using-let-and-not-const#:~:text=It (Accessed: Dec 22,2023).
+
+Expree, J.S. (2017) Rouiting, Express JS Guide. Available at: https://expressjs.com/en/guide/routing.html (Accessed: Dec 22,2023).
+
+Express, J.S. (2017) Error Handling. Available at: https://expressjs.com/en/guide/error-handling.html (Accessed: Dec 22,2023).
+
+Haney, D. (2018) What is the issue CORS is trying to solve? . Available at: https://stackoverflow.com/questions/27365303/what-is-the-issue-cors-is-trying-to-solve (Accessed: 22/12/2023).
+
+MDN Docs (no date) EventTarget: addEventListener() method. Available at: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener (Accessed: Dec 22,2023).
+
+MDN Web Docs (No date) Lexical Grammar. Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#automatic_semicolon_insertion (Accessed: Dec 22,2023).
+
+MDN Web Docs (no date) What is JavaScript? Available at: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript#using_addeventlistener_instead (Accessed: Dec 22,2023).
+
+Mdn Web Docs Dynamic Typing. Available at: https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing (Accessed: Dec 22,2023).
+
+Mortensen, P. (2021) Const in JavaScript: when to use it and is it necessary? Available at: https://stackoverflow.com/questions/21237105/const-in-javascript-when-to-use-it-and-is-it-necessary (Accessed: Dec 22,2023).
+
+O'Grady, B. (2023) 'What is a Framework? Why we use Software Frameworks', Code institute, 10 Feb. Available at: https://codeinstitute.net/blog/what-is-a-framework/#:~:text=Frameworks%20are%20a%20huge%20help,has%20to%20write%20less%20code (Accessed: .
+
+Tutorials Point Vue Js - overview. Available at: https://www.tutorialspoint.com/vuejs/vuejs_overview.htm (Accessed: Dec 22,2023).
+
+Vue Js (no date) List Rendering. Available at: https://v1.vuejs.org/guide/list.html#v-for (Accessed: Dec 22,2023).
+
+Vue Js Rendering Mechanism. Available at: https://vuejs.org/guide/extras/rendering-mechanism.html#virtual-dom (Accessed: Dec 22,2023).
+
+W3Schools Vue v-model Directive. Available at: https://www.w3schools.com/vue/ref_v-model.php (Accessed: Dec 22,2023).
