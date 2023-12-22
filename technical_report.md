@@ -271,7 +271,7 @@ Amazon Configuring CORS for an HTTP API. Amazon. Available at: https://docs.aws.
 
 Athena, A.I. (2023) [JavaScript] - Why are we using let and not const? Available at: https://www.shecodes.io/athena/124459-why-are-we-using-let-and-not-const#:~:text=It (Accessed: Dec 22,2023).
 
-Expree, J.S. (2017) Rouiting, Express JS Guide. Available at: https://expressjs.com/en/guide/routing.html (Accessed: Dec 22,2023).
+Express, J.S. (2017) Routing, Express JS Guide. Available at: https://expressjs.com/en/guide/routing.html (Accessed: Dec 22,2023).
 
 Express, J.S. (2017) Error Handling. Available at: https://expressjs.com/en/guide/error-handling.html (Accessed: Dec 22,2023).
 
